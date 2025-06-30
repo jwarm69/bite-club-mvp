@@ -1,0 +1,880 @@
+
+> backend@1.0.0 dev
+> nodemon src/index.ts
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: ts,json[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/orders.ts(217,70): error TS2339: Property 'id' does not exist on type '{ order: { user: { id: string; active: boolean; createdAt: Date; updatedAt: Date; email: string; firstName: string | null; lastName: string | null; passwordHash: string; role: UserRole; schoolId: string | null; creditBalance: Decimal; phone: string | null; }; restaurant: { ...; }; orderItems: ({ ...; } & { ...; })[]...'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [ 2339 ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/calls.ts(248,49): error TS2339: Property 'callSid' does not exist on type '{ success: boolean; error?: string | undefined; }'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [ 2339 ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/calls.ts(248,49): error TS2339: Property 'callSid' does not exist on type '{ success: boolean; error?: string | undefined; }'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [ 2339 ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83
+                throw new Error("accountSid must start with AC" + apiKeyMsg);
+                      ^
+Error: accountSid must start with AC
+    at Twilio.setAccountSid (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83:23)
+    at new Client (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:45:18)
+    at new Twilio (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/rest/Twilio.js:33:9)
+    at TwilioSDK (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/index.js:44:12)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/services/call.ts:16:11)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83
+                throw new Error("accountSid must start with AC" + apiKeyMsg);
+                      ^
+Error: accountSid must start with AC
+    at Twilio.setAccountSid (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83:23)
+    at new Client (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:45:18)
+    at new Twilio (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/rest/Twilio.js:33:9)
+    at TwilioSDK (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/index.js:44:12)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/services/call.ts:16:11)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83
+                throw new Error("accountSid must start with AC" + apiKeyMsg);
+                      ^
+Error: accountSid must start with AC
+    at Twilio.setAccountSid (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83:23)
+    at new Client (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:45:18)
+    at new Twilio (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/rest/Twilio.js:33:9)
+    at TwilioSDK (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/index.js:44:12)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/services/call.ts:16:11)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83
+                throw new Error("accountSid must start with AC" + apiKeyMsg);
+                      ^
+Error: accountSid must start with AC
+    at Twilio.setAccountSid (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83:23)
+    at new Client (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:45:18)
+    at new Twilio (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/rest/Twilio.js:33:9)
+    at TwilioSDK (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/index.js:44:12)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/services/call.ts:16:11)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83
+                throw new Error("accountSid must start with AC" + apiKeyMsg);
+                      ^
+Error: accountSid must start with AC
+    at Twilio.setAccountSid (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83:23)
+    at new Client (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:45:18)
+    at new Twilio (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/rest/Twilio.js:33:9)
+    at TwilioSDK (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/index.js:44:12)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/services/call.ts:16:11)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83
+                throw new Error("accountSid must start with AC" + apiKeyMsg);
+                      ^
+Error: accountSid must start with AC
+    at Twilio.setAccountSid (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:83:23)
+    at new Client (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/base/BaseTwilio.js:45:18)
+    at new Twilio (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/rest/Twilio.js:33:9)
+    at TwilioSDK (/Users/jackwarman/bite-club-mvp/backend/node_modules/twilio/lib/index.js:44:12)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/services/call.ts:16:11)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/integrations.ts(9,47): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(11,107): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(27,48): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(30,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(51,49): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(54,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(75,46): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(97,51): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(100,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(121,61): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [
+    2345, 2339, 2345,
+    2339, 2345, 2339,
+    2345, 2345, 2339,
+    2345
+  ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+(node:39725) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 exit listeners added to [Bus]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/integrations.ts(27,48): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(30,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(51,49): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(54,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(75,46): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(97,51): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(100,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(121,61): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [
+    2345, 2339, 2345,
+    2339, 2345, 2345,
+    2339, 2345
+  ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/integrations.ts(21,32): error TS2304: Cannot find name 'prisma'.
+src/routes/integrations.ts(43,48): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(46,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(67,49): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(70,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(91,46): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(113,51): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(116,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(137,61): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [
+    2304, 2345, 2339,
+    2345, 2339, 2345,
+    2345, 2339, 2345
+  ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/integrations.ts(44,48): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(47,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(68,49): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(71,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(92,46): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(114,51): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(117,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(138,61): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [
+    2345, 2339, 2345,
+    2339, 2345, 2345,
+    2339, 2345
+  ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/routes/integrations.ts(89,49): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(92,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(113,46): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(135,51): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+src/routes/integrations.ts(138,96): error TS2339: Property 'restaurantId' does not exist on type 'JWTPayload'.
+src/routes/integrations.ts(159,61): error TS2345: Argument of type '("RESTAURANT" | "ADMIN")[]' is not assignable to parameter of type 'UserRole'.
+
+    at createTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:863:19)
+    at getOutput (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1077:36)
+    at Object.compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1433:41)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [ 2345, 2339, 2345, 2345, 2339, 2345 ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+🛑 Shutting down gracefully...
+[32m[nodemon] clean exit - waiting for changes before restart[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+🚀 Server running on port 3001
+📊 Health check: http://localhost:3001/health
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Object.<anonymous> (/Users/jackwarman/bite-club-mvp/backend/src/index.ts:69:8)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Module.m._compile (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1618:23)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/jackwarman/bite-club-mvp/backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m

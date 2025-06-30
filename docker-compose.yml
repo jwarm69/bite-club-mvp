@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+    volumes:
+      # Volume mounting for instant code updates
+      - ./backend/src:/app/src
+      - ./backend/prisma:/app/prisma
+      # Preserve node_modules in container
+      - /app/node_modules
+      - /app/dist
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001/api
+      - REACT_APP_STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      # Volume mounting for instant code updates
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      # Preserve node_modules in container
+      - /app/node_modules
+    depends_on:
+      - backend
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: Database admin interface
+  # prisma-studio:
+  #   image: node:18-alpine
+  #   working_dir: /app
+  #   ports:
+  #     - "5555:5555"
+  #   environment:
+  #     - DATABASE_URL=${DATABASE_URL}
+  #   volumes:
+  #     - ./backend:/app
+  #   command: sh -c "npm install && npx prisma studio --hostname 0.0.0.0"
+  #   depends_on:
+  #     - backend
+
+volumes:
+  node_modules_backend:
+  node_modules_frontend:
+
+networks:
+  default:
+    name: bite-club-network

@@ -1,0 +1,280 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model School {
+  id          String       @id @default(cuid())
+  name        String
+  domain      String       @unique
+  location    String?
+  active      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  restaurants Restaurant[]
+  users       User[]
+
+  @@map("schools")
+}
+
+model User {
+  id                    String                 @id @default(cuid())
+  email                 String                 @unique
+  passwordHash          String
+  role                  UserRole
+  schoolId              String?
+  creditBalance         Decimal                @default(0) @db.Decimal(10, 2)
+  firstName             String?
+  lastName              String?
+  phone                 String?
+  active                Boolean                @default(true)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  creditTransactions    CreditTransaction[]
+  customerRelationships CustomerRelationship[]
+  orders                Order[]
+  passwordResetTokens   PasswordResetToken[]
+  ownedRestaurants      Restaurant[]           @relation("RestaurantOwner")
+  userSessions          UserSession[]
+  school                School?                @relation(fields: [schoolId], references: [id])
+
+  @@map("users")
+}
+
+model UserSession {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_sessions")
+}
+
+model Restaurant {
+  id                    String                 @id @default(cuid())
+  name                  String
+  phone                 String?
+  email                 String?
+  schoolId              String
+  description           String?
+  logoUrl               String?
+  menuSchema            Json?
+  callEnabled           Boolean                @default(true)
+  active                Boolean                @default(true)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  operatingHours        Json?
+  userId                String?
+  callPhone             String?
+  callRetries           Int                    @default(2)
+  callTimeoutSeconds    Int                    @default(30)
+  externalIntegrations  Json?                  @default("{}")
+  integrationEnabled    Boolean                @default(false)
+  toastLocationGuid     String?
+  callLogs              CallLog[]
+  customerRelationships CustomerRelationship[]
+  integrationConfigs    IntegrationConfig[]
+  menuItems             MenuItem[]
+  orders                Order[]
+  restaurantPromotions  RestaurantPromotions?
+  school                School                 @relation(fields: [schoolId], references: [id])
+  user                  User?                  @relation("RestaurantOwner", fields: [userId], references: [id])
+
+  @@map("restaurants")
+}
+
+model RestaurantPromotions {
+  id                    String     @id @default(cuid())
+  restaurantId          String     @unique
+  firstTimeEnabled      Boolean    @default(false)
+  firstTimePercent      Decimal    @default(0) @db.Decimal(5, 2)
+  loyaltyEnabled        Boolean    @default(false)
+  loyaltySpendThreshold Decimal    @default(0) @db.Decimal(10, 2)
+  loyaltyRewardAmount   Decimal    @default(0) @db.Decimal(10, 2)
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+  restaurant            Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@map("restaurant_promotions")
+}
+
+model MenuItem {
+  id            String      @id @default(cuid())
+  restaurantId  String
+  name          String
+  description   String?
+  price         Decimal     @db.Decimal(10, 2)
+  category      String?
+  imageUrl      String?
+  available     Boolean     @default(true)
+  modifiers     Json?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  externalIds   Json?       @default("{}")
+  toastItemGuid String?
+  restaurant    Restaurant  @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  orderItems    OrderItem[]
+
+  @@map("menu_items")
+}
+
+model CustomerRelationship {
+  id              String     @id @default(cuid())
+  userId          String
+  restaurantId    String
+  isFirstTime     Boolean    @default(true)
+  totalSpent      Decimal    @default(0) @db.Decimal(10, 2)
+  loyaltyProgress Decimal    @default(0) @db.Decimal(10, 2)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  restaurant      Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, restaurantId])
+  @@map("customer_relationships")
+}
+
+model Order {
+  id                  String         @id @default(cuid())
+  userId              String
+  restaurantId        String
+  totalAmount         Decimal        @db.Decimal(10, 2)
+  discountAmount      Decimal        @default(0) @db.Decimal(10, 2)
+  finalAmount         Decimal        @db.Decimal(10, 2)
+  status              OrderStatus    @default(PENDING)
+  specialInstructions String?
+  promotionApplied    String?
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  refundReason        String?
+  refundedAt          DateTime?
+  refundedBy          String?
+  total               Decimal        @default(0) @db.Decimal(10, 2)
+  externalOrderData   Json?          @default("{}")
+  integrationStatus   String?
+  toastOrderGuid      String?
+  callLogs            CallLog[]
+  orderItems          OrderItem[]
+  restaurant          Restaurant     @relation(fields: [restaurantId], references: [id])
+  user                User           @relation(fields: [userId], references: [id])
+  promotionCost       PromotionCost?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id                 String   @id @default(cuid())
+  orderId            String
+  menuItemId         String
+  quantity           Int      @default(1)
+  unitPrice          Decimal  @db.Decimal(10, 2)
+  totalPrice         Decimal  @db.Decimal(10, 2)
+  modifiersSelected  Json?
+  customInstructions String?
+  createdAt          DateTime @default(now())
+  menuItem           MenuItem @relation(fields: [menuItemId], references: [id])
+  order              Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+model CreditTransaction {
+  id              String   @id @default(cuid())
+  userId          String
+  amount          Decimal  @db.Decimal(10, 2)
+  type            String
+  description     String?
+  stripePaymentId String?
+  orderId         String?
+  createdAt       DateTime @default(now())
+  adminId         String?
+  user            User     @relation(fields: [userId], references: [id])
+
+  @@map("credit_transactions")
+}
+
+model PromotionCost {
+  id             String   @id @default(cuid())
+  orderId        String   @unique
+  restaurantId   String
+  costAmount     Decimal  @db.Decimal(10, 2)
+  promotionType  String
+  originalTotal  Decimal  @db.Decimal(10, 2)
+  discountAmount Decimal  @db.Decimal(10, 2)
+  createdAt      DateTime @default(now())
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("promotion_costs")
+}
+
+model CallLog {
+  id             String     @id @default(cuid())
+  orderId        String
+  restaurantId   String
+  callTime       DateTime
+  success        Boolean    @default(false)
+  duration       Int?
+  responseData   Json?
+  followUpNeeded Boolean    @default(false)
+  followUpTime   DateTime?
+  transcript     String?
+  createdAt      DateTime   @default(now())
+  cost           Decimal?   @db.Decimal(5, 4)
+  keypadResponse String?
+  responseType   String?
+  twilioCallSid  String?
+  order          Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  restaurant     Restaurant @relation(fields: [restaurantId], references: [id])
+
+  @@map("call_logs")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
+}
+
+model IntegrationConfig {
+  id              String     @id @default(cuid())
+  restaurantId    String
+  integrationType String
+  configData      Json
+  enabled         Boolean    @default(false)
+  syncEnabled     Boolean    @default(false)
+  lastSyncAt      DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  restaurant      Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@unique([restaurantId, integrationType])
+  @@map("integration_configs")
+}
+
+enum UserRole {
+  STUDENT
+  RESTAURANT
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}

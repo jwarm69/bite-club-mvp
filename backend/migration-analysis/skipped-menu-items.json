@@ -1,0 +1,1266 @@
+{
+  "timestamp": "2025-06-27T05:01:27.758Z",
+  "summary": {
+    "totalItems": 1679,
+    "skippedItems": 113,
+    "migratedItems": 1566
+  },
+  "skippedItems": [
+    {
+      "id": 3,
+      "name": "Test",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 13,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 15,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 17,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 18,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 19,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 78,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 81,
+      "name": "Fries",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "description": "Tossed in crock spice",
+      "available": true
+    },
+    {
+      "id": 109,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 110,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 111,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 112,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 113,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 114,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 115,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 116,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 117,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 118,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 119,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 120,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 121,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 269,
+      "name": "Pad Thai (Dinner) with Pork",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 270,
+      "name": "Pad Thai (Dinner) with Fried Tofu",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 271,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 272,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 273,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 274,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 275,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 276,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 277,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 278,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "description": "Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",
+      "available": true
+    },
+    {
+      "id": 279,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 280,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 367,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 514,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 515,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 516,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 517,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 518,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 519,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 559,
+      "name": "Sprite",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 150,
+      "available": true
+    },
+    {
+      "id": 560,
+      "name": "Coca Coca",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 150,
+      "available": true
+    },
+    {
+      "id": 561,
+      "name": "Water",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 150,
+      "available": true
+    },
+    {
+      "id": 562,
+      "name": "Acai Bowl",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 1399,
+      "description": "A delicious blend of organic açaí and bananas. Toppings: strawberries, bananas, blueberries, granola, organic coconut shreds, honey or caramel drizzle.",
+      "available": true
+    },
+    {
+      "id": 563,
+      "name": "Tropical Bowl",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 1399,
+      "description": "Tropical mango blend. Topped with banana, mango, kiwi, granola, organic coconut shreds, honey or caramel drizzle.",
+      "available": true
+    },
+    {
+      "id": 564,
+      "name": "Mezami Mango",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 999,
+      "description": "Mango, pineapples, peaches.",
+      "available": true
+    },
+    {
+      "id": 565,
+      "name": "Straddle-Me-Berry Smothie",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 900,
+      "description": "Strawberry, banana, white chocolate.",
+      "available": true
+    },
+    {
+      "id": 566,
+      "name": "Green Growth",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 1050,
+      "description": "Kale, apple, celery, spinach.",
+      "available": true
+    },
+    {
+      "id": 567,
+      "name": "Crunch (16oz)",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "description": "Chia seeds, apple or strawberry, almond butter or peanut butter, chocolate, banana, dates, whey protein.",
+      "available": true
+    },
+    {
+      "id": 568,
+      "name": "Crunch (16oz)",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 569,
+      "name": "Crunch (16oz)",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 570,
+      "name": "Crunch (24oz)",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 571,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 572,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 573,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 645,
+      "name": "Test Mango Shake",
+      "restaurantId": 21,
+      "restaurantName": null,
+      "reason": "Test or placeholder data",
+      "price": 2100,
+      "available": true
+    },
+    {
+      "id": 646,
+      "name": "Test Burger",
+      "restaurantId": 21,
+      "restaurantName": null,
+      "reason": "Test or placeholder data",
+      "price": 3200,
+      "available": true
+    },
+    {
+      "id": 647,
+      "name": "Test Pizza",
+      "restaurantId": 21,
+      "restaurantName": null,
+      "reason": "Test or placeholder data",
+      "price": 5499,
+      "available": true
+    },
+    {
+      "id": 652,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 653,
+      "name": null,
+      "restaurantId": 26,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 1250,
+      "available": true
+    },
+    {
+      "id": 654,
+      "name": "Test",
+      "restaurantId": 24,
+      "restaurantName": null,
+      "reason": "Test or placeholder data",
+      "price": 999,
+      "available": true
+    },
+    {
+      "id": 704,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 712,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 713,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 714,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 715,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 716,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 879,
+      "name": "Curry (Chicken)",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "description": "Coconut curry sauce, seasoned Idaho potatoes, chicken, red onion, mozzarella, cilantro",
+      "available": true
+    },
+    {
+      "id": 880,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 881,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 882,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 907,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 908,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 909,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 910,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 911,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 912,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 913,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 917,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 918,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 919,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 920,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 964,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 978,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1000,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1019,
+      "name": "Tofu Roll",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 0,
+      "description": "Tofu, fried sweet potato, avocado, asparagus",
+      "available": true
+    },
+    {
+      "id": 1039,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 93,
+      "available": true
+    },
+    {
+      "id": 1040,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1041,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1066,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1067,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1089,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1090,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1091,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1092,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1093,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1208,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1219,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1246,
+      "name": "Tomato Toast with Fried Chicken",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 2000,
+      "description": " Roasted grape tomatoes, House avocado feta cheese, Avocado, Cured egg yolk, Thyme, Sourdough",
+      "available": true
+    },
+    {
+      "id": 1247,
+      "name": "Tomato Toast with Grilled Chicken",
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or invalid restaurant ID",
+      "price": 2000,
+      "description": " Roasted grape tomatoes, House avocado feta cheese, Avocado, Cured egg yolk, Thyme, Sourdough",
+      "available": true
+    },
+    {
+      "id": 1248,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1249,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1250,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1251,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1260,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1278,
+      "name": null,
+      "restaurantId": 0,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1643,
+      "name": null,
+      "restaurantId": 29,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1644,
+      "name": null,
+      "restaurantId": 29,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1645,
+      "name": null,
+      "restaurantId": 29,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1646,
+      "name": null,
+      "restaurantId": 29,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1647,
+      "name": null,
+      "restaurantId": 29,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1648,
+      "name": null,
+      "restaurantId": 29,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    },
+    {
+      "id": 1649,
+      "name": null,
+      "restaurantId": 29,
+      "restaurantName": null,
+      "reason": "Missing or empty menu item name",
+      "price": 0,
+      "available": true
+    }
+  ],
+  "restaurantStats": [
+    {
+      "id": 8,
+      "name": "Birdie Box Sando",
+      "totalItems": 11,
+      "skippedItems": 0,
+      "migratedItems": 11,
+      "skipReasons": {}
+    },
+    {
+      "id": 21,
+      "name": "Halo Potato Donuts",
+      "totalItems": 5,
+      "skippedItems": 3,
+      "migratedItems": 2,
+      "skipReasons": {
+        "Test or placeholder data": 3
+      }
+    },
+    {
+      "id": 10,
+      "name": "Burrito Famous",
+      "totalItems": 28,
+      "skippedItems": 0,
+      "migratedItems": 28,
+      "skipReasons": {}
+    },
+    {
+      "id": 1,
+      "name": "Restaurant 1",
+      "totalItems": 48,
+      "skippedItems": 0,
+      "migratedItems": 48,
+      "skipReasons": {}
+    },
+    {
+      "id": 13,
+      "name": "Restaurant 13",
+      "totalItems": 39,
+      "skippedItems": 0,
+      "migratedItems": 39,
+      "skipReasons": {}
+    },
+    {
+      "id": 11,
+      "name": "Restaurant 11",
+      "totalItems": 21,
+      "skippedItems": 0,
+      "migratedItems": 21,
+      "skipReasons": {}
+    },
+    {
+      "id": 16,
+      "name": "Restaurant 16",
+      "totalItems": 53,
+      "skippedItems": 0,
+      "migratedItems": 53,
+      "skipReasons": {}
+    },
+    {
+      "id": 15,
+      "name": "Restaurant 15",
+      "totalItems": 38,
+      "skippedItems": 0,
+      "migratedItems": 38,
+      "skipReasons": {}
+    },
+    {
+      "id": 5,
+      "name": "Restaurant 5",
+      "totalItems": 68,
+      "skippedItems": 0,
+      "migratedItems": 68,
+      "skipReasons": {}
+    },
+    {
+      "id": 7,
+      "name": "Restaurant 7",
+      "totalItems": 53,
+      "skippedItems": 0,
+      "migratedItems": 53,
+      "skipReasons": {}
+    },
+    {
+      "id": 9,
+      "name": "Restaurant 9",
+      "totalItems": 53,
+      "skippedItems": 0,
+      "migratedItems": 53,
+      "skipReasons": {}
+    },
+    {
+      "id": 17,
+      "name": "Restaurant 17",
+      "totalItems": 163,
+      "skippedItems": 0,
+      "migratedItems": 163,
+      "skipReasons": {}
+    },
+    {
+      "id": 2,
+      "name": "Restaurant 2",
+      "totalItems": 24,
+      "skippedItems": 0,
+      "migratedItems": 24,
+      "skipReasons": {}
+    },
+    {
+      "id": 19,
+      "name": "Restaurant 19",
+      "totalItems": 63,
+      "skippedItems": 0,
+      "migratedItems": 63,
+      "skipReasons": {}
+    },
+    {
+      "id": 14,
+      "name": "Restaurant 14",
+      "totalItems": 61,
+      "skippedItems": 0,
+      "migratedItems": 61,
+      "skipReasons": {}
+    },
+    {
+      "id": 12,
+      "name": "Humble Wood Fire Pizza",
+      "totalItems": 39,
+      "skippedItems": 0,
+      "migratedItems": 39,
+      "skipReasons": {}
+    },
+    {
+      "id": 23,
+      "name": "Restaurant 23",
+      "totalItems": 105,
+      "skippedItems": 0,
+      "migratedItems": 105,
+      "skipReasons": {}
+    },
+    {
+      "id": 26,
+      "name": "Restaurant 26",
+      "totalItems": 145,
+      "skippedItems": 1,
+      "migratedItems": 144,
+      "skipReasons": {
+        "Missing or empty menu item name": 1
+      }
+    },
+    {
+      "id": 24,
+      "name": "Restaurant 24",
+      "totalItems": 33,
+      "skippedItems": 1,
+      "migratedItems": 32,
+      "skipReasons": {
+        "Test or placeholder data": 1
+      }
+    },
+    {
+      "id": 27,
+      "name": "Restaurant 27",
+      "totalItems": 322,
+      "skippedItems": 0,
+      "migratedItems": 322,
+      "skipReasons": {}
+    },
+    {
+      "id": 25,
+      "name": "Restaurant 25",
+      "totalItems": 51,
+      "skippedItems": 0,
+      "migratedItems": 51,
+      "skipReasons": {}
+    },
+    {
+      "id": 28,
+      "name": "Restaurant 28",
+      "totalItems": 23,
+      "skippedItems": 0,
+      "migratedItems": 23,
+      "skipReasons": {}
+    },
+    {
+      "id": 29,
+      "name": "Restaurant 29",
+      "totalItems": 26,
+      "skippedItems": 7,
+      "migratedItems": 19,
+      "skipReasons": {
+        "Missing or empty menu item name": 7
+      }
+    },
+    {
+      "id": 31,
+      "name": "Restaurant 31",
+      "totalItems": 44,
+      "skippedItems": 0,
+      "migratedItems": 44,
+      "skipReasons": {}
+    },
+    {
+      "id": 32,
+      "name": "Restaurant 32",
+      "totalItems": 33,
+      "skippedItems": 0,
+      "migratedItems": 33,
+      "skipReasons": {}
+    },
+    {
+      "id": 33,
+      "name": "Restaurant 33",
+      "totalItems": 29,
+      "skippedItems": 0,
+      "migratedItems": 29,
+      "skipReasons": {}
+    }
+  ]
+}

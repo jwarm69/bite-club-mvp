@@ -1,0 +1,114 @@
+ID,Name,Restaurant Name,Restaurant ID,Reason,Price,Description,Available
+3,"Test","",,"Missing or invalid restaurant ID",,"",true
+13,"","",,"Missing or empty menu item name",,"",true
+15,"","",,"Missing or empty menu item name",,"",true
+17,"","",,"Missing or empty menu item name",,"",true
+18,"","",,"Missing or empty menu item name",,"",true
+19,"","",,"Missing or empty menu item name",,"",true
+78,"","",,"Missing or empty menu item name",,"",true
+81,"Fries","",,"Missing or invalid restaurant ID",,"Tossed in crock spice",true
+109,"","",,"Missing or empty menu item name",,"",true
+110,"","",,"Missing or empty menu item name",,"",true
+111,"","",,"Missing or empty menu item name",,"",true
+112,"","",,"Missing or empty menu item name",,"",true
+113,"","",,"Missing or empty menu item name",,"",true
+114,"","",,"Missing or empty menu item name",,"",true
+115,"","",,"Missing or empty menu item name",,"",true
+116,"","",,"Missing or empty menu item name",,"",true
+117,"","",,"Missing or empty menu item name",,"",true
+118,"","",,"Missing or empty menu item name",,"",true
+119,"","",,"Missing or empty menu item name",,"",true
+120,"","",,"Missing or empty menu item name",,"",true
+121,"","",,"Missing or empty menu item name",,"",true
+269,"Pad Thai (Dinner) with Pork","",,"Missing or invalid restaurant ID",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+270,"Pad Thai (Dinner) with Fried Tofu","",,"Missing or invalid restaurant ID",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+271,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+272,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+273,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+274,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+275,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+276,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+277,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+278,"","",,"Missing or empty menu item name",,"Stir fried thin rice noodles with egg, Scallion, bean sprouts, ground peanuts.",true
+279,"","",,"Missing or empty menu item name",,"",true
+280,"","",,"Missing or empty menu item name",,"",true
+367,"","",,"Missing or empty menu item name",,"",true
+514,"","",,"Missing or empty menu item name",,"",true
+515,"","",,"Missing or empty menu item name",,"",true
+516,"","",,"Missing or empty menu item name",,"",true
+517,"","",,"Missing or empty menu item name",,"",true
+518,"","",,"Missing or empty menu item name",,"",true
+519,"","",,"Missing or empty menu item name",,"",true
+559,"Sprite","",,"Missing or invalid restaurant ID",1.50,"",true
+560,"Coca Coca","",,"Missing or invalid restaurant ID",1.50,"",true
+561,"Water","",,"Missing or invalid restaurant ID",1.50,"",true
+562,"Acai Bowl","",,"Missing or invalid restaurant ID",13.99,"A delicious blend of organic açaí and bananas. Toppings: strawberries, bananas, blueberries, granola, organic coconut shreds, honey or caramel drizzle.",true
+563,"Tropical Bowl","",,"Missing or invalid restaurant ID",13.99,"Tropical mango blend. Topped with banana, mango, kiwi, granola, organic coconut shreds, honey or caramel drizzle.",true
+564,"Mezami Mango","",,"Missing or invalid restaurant ID",9.99,"Mango, pineapples, peaches.",true
+565,"Straddle-Me-Berry Smothie","",,"Missing or invalid restaurant ID",9.00,"Strawberry, banana, white chocolate.",true
+566,"Green Growth","",,"Missing or invalid restaurant ID",10.50,"Kale, apple, celery, spinach.",true
+567,"Crunch (16oz)","",,"Missing or invalid restaurant ID",,"Chia seeds, apple or strawberry, almond butter or peanut butter, chocolate, banana, dates, whey protein.",true
+568,"Crunch (16oz)","",,"Missing or invalid restaurant ID",,"",true
+569,"Crunch (16oz)","",,"Missing or invalid restaurant ID",,"",true
+570,"Crunch (24oz)","",,"Missing or invalid restaurant ID",,"",true
+571,"","",,"Missing or empty menu item name",,"",true
+572,"","",,"Missing or empty menu item name",,"",true
+573,"","",,"Missing or empty menu item name",,"",true
+645,"Test Mango Shake","",21,"Test or placeholder data",21.00,"",true
+646,"Test Burger","",21,"Test or placeholder data",32.00,"",true
+647,"Test Pizza","",21,"Test or placeholder data",54.99,"",true
+652,"","",,"Missing or empty menu item name",,"",true
+653,"","",26,"Missing or empty menu item name",12.50,"",true
+654,"Test","",24,"Test or placeholder data",9.99,"",true
+704,"","",,"Missing or empty menu item name",,"",true
+712,"","",,"Missing or empty menu item name",,"",true
+713,"","",,"Missing or empty menu item name",,"",true
+714,"","",,"Missing or empty menu item name",,"",true
+715,"","",,"Missing or empty menu item name",,"",true
+716,"","",,"Missing or empty menu item name",,"",true
+879,"Curry (Chicken)","",,"Missing or invalid restaurant ID",,"Coconut curry sauce, seasoned Idaho potatoes, chicken, red onion, mozzarella, cilantro",true
+880,"","",,"Missing or empty menu item name",,"",true
+881,"","",,"Missing or empty menu item name",,"",true
+882,"","",,"Missing or empty menu item name",,"",true
+907,"","",,"Missing or empty menu item name",,"",true
+908,"","",,"Missing or empty menu item name",,"",true
+909,"","",,"Missing or empty menu item name",,"",true
+910,"","",,"Missing or empty menu item name",,"",true
+911,"","",,"Missing or empty menu item name",,"",true
+912,"","",,"Missing or empty menu item name",,"",true
+913,"","",,"Missing or empty menu item name",,"",true
+917,"","",,"Missing or empty menu item name",,"",true
+918,"","",,"Missing or empty menu item name",,"",true
+919,"","",,"Missing or empty menu item name",,"",true
+920,"","",,"Missing or empty menu item name",,"",true
+964,"","",,"Missing or empty menu item name",,"",true
+978,"","",,"Missing or empty menu item name",,"",true
+1000,"","",,"Missing or empty menu item name",,"",true
+1019,"Tofu Roll","",,"Missing or invalid restaurant ID",,"Tofu, fried sweet potato, avocado, asparagus",true
+1039,"","",,"Missing or empty menu item name",0.93,"",true
+1040,"","",,"Missing or empty menu item name",,"",true
+1041,"","",,"Missing or empty menu item name",,"",true
+1066,"","",,"Missing or empty menu item name",,"",true
+1067,"","",,"Missing or empty menu item name",,"",true
+1089,"","",,"Missing or empty menu item name",,"",true
+1090,"","",,"Missing or empty menu item name",,"",true
+1091,"","",,"Missing or empty menu item name",,"",true
+1092,"","",,"Missing or empty menu item name",,"",true
+1093,"","",,"Missing or empty menu item name",,"",true
+1208,"","",,"Missing or empty menu item name",,"",true
+1219,"","",,"Missing or empty menu item name",,"",true
+1246,"Tomato Toast with Fried Chicken","",,"Missing or invalid restaurant ID",20.00," Roasted grape tomatoes, House avocado feta cheese, Avocado, Cured egg yolk, Thyme, Sourdough",true
+1247,"Tomato Toast with Grilled Chicken","",,"Missing or invalid restaurant ID",20.00," Roasted grape tomatoes, House avocado feta cheese, Avocado, Cured egg yolk, Thyme, Sourdough",true
+1248,"","",,"Missing or empty menu item name",,"",true
+1249,"","",,"Missing or empty menu item name",,"",true
+1250,"","",,"Missing or empty menu item name",,"",true
+1251,"","",,"Missing or empty menu item name",,"",true
+1260,"","",,"Missing or empty menu item name",,"",true
+1278,"","",,"Missing or empty menu item name",,"",true
+1643,"","",29,"Missing or empty menu item name",,"",true
+1644,"","",29,"Missing or empty menu item name",,"",true
+1645,"","",29,"Missing or empty menu item name",,"",true
+1646,"","",29,"Missing or empty menu item name",,"",true
+1647,"","",29,"Missing or empty menu item name",,"",true
+1648,"","",29,"Missing or empty menu item name",,"",true
+1649,"","",29,"Missing or empty menu item name",,"",true

@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-06-27T03:59:18.969Z",
+  "databaseUrl": "postgresql://***:***@db.emkzjglkxshkhtcohngc.supabase.co:5432/postgres",
+  "userCount": 3,
+  "restaurantCount": 1,
+  "menuItemCount": 3
+}

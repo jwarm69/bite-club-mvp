@@ -1,0 +1,50 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "seed": "ts-node src/utils/seed.ts",
+    "migrate:test": "ts-node scripts/xano-migration/test-migration.ts",
+    "migrate:full": "ts-node scripts/xano-migration/run-migration.ts full",
+    "migrate:data": "ts-node scripts/xano-migration/run-migration.ts data",
+    "migrate:images": "ts-node scripts/xano-migration/run-migration.ts images",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^6.10.1",
+    "@supabase/supabase-js": "^2.50.0",
+    "@tailwindcss/postcss": "^4.1.10",
+    "@types/nodemailer": "^6.4.17",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^7.0.3",
+    "openai": "^5.7.0",
+    "prisma": "^6.10.1",
+    "socket.io": "^4.8.1",
+    "stripe": "^18.2.1",
+    "twilio": "^5.7.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.3",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
