@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=staging
+      - DATABASE_URL=${STAGING_DATABASE_URL}
+      - JWT_SECRET=${STAGING_JWT_SECRET}
+      - STRIPE_SECRET_KEY=${STAGING_STRIPE_SECRET_KEY}
+      - STRIPE_PUBLISHABLE_KEY=${STAGING_STRIPE_PUBLISHABLE_KEY}
+      - TWILIO_ACCOUNT_SID=${STAGING_TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${STAGING_TWILIO_AUTH_TOKEN}
+      - TWILIO_PHONE_NUMBER=${STAGING_TWILIO_PHONE_NUMBER}
+      - OPENAI_API_KEY=${STAGING_OPENAI_API_KEY}
+      # Staging-specific settings
+      - LOG_LEVEL=debug
+      - ENABLE_DEBUG_ROUTES=true
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=staging
+      - REACT_APP_API_URL=${STAGING_API_URL}
+      - REACT_APP_STRIPE_PUBLISHABLE_KEY=${STAGING_STRIPE_PUBLISHABLE_KEY}
+      # Staging-specific settings
+      - REACT_APP_ENABLE_DEVTOOLS=true
+      - REACT_APP_ENVIRONMENT=staging
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  default:
+    name: bite-club-staging

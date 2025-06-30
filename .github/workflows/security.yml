@@ -1,0 +1,71 @@
+name: 🔒 Security & Dependencies
+
+on:
+  schedule:
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  dependency-check:
+    name: 📦 Dependency Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 🔍 Audit backend dependencies
+        run: |
+          cd backend
+          npm audit --audit-level=moderate || true
+          
+      - name: 🔍 Audit frontend dependencies
+        run: |
+          cd frontend
+          npm audit --audit-level=moderate || true
+          
+      - name: 📊 Generate security report
+        run: |
+          echo "## 🔒 Security Audit Report" > security-report.md
+          echo "Generated on: $(date)" >> security-report.md
+          echo "" >> security-report.md
+          echo "### Backend Dependencies" >> security-report.md
+          cd backend && npm audit --json | jq -r '.vulnerabilities | length' >> ../security-report.md
+          echo "" >> security-report.md
+          echo "### Frontend Dependencies" >> security-report.md
+          cd ../frontend && npm audit --json | jq -r '.vulnerabilities | length' >> ../security-report.md
+          
+      - name: 💾 Upload security report
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-report
+          path: security-report.md
+
+  docker-security:
+    name: 🐳 Docker Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: 🏗️ Build images for scanning
+        run: |
+          docker build -t bite-club-backend:scan backend/
+          docker build -t bite-club-frontend:scan frontend/
+          
+      - name: 🔍 Scan backend image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'bite-club-backend:scan'
+          format: 'table'
+          
+      - name: 🔍 Scan frontend image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'bite-club-frontend:scan'
+          format: 'table'

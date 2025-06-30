@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  # Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+
+  # Grafana for metrics visualization
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3030:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    restart: unless-stopped
+
+  # Loki for log aggregation
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config.yml:/etc/loki/local-config.yaml
+    restart: unless-stopped
+
+  # Promtail for log collection
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - /var/log:/var/log
+      - ./promtail-config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    restart: unless-stopped
+
+  # Node Exporter for system metrics
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    restart: unless-stopped
+
+  # Redis Exporter for Redis metrics
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+    ports:
+      - "9121:9121"
+    environment:
+      - REDIS_ADDR=redis://bite-club-mvp-redis-1:6379
+    restart: unless-stopped
+
+  # Uptime monitoring
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    ports:
+      - "3001:3001"
+    volumes:
+      - uptime-kuma:/app/data
+    restart: unless-stopped
+
+volumes:
+  grafana-storage:
+  uptime-kuma:
+
+networks:
+  default:
+    name: bite-club-monitoring
+    external: false

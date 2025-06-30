@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  # Bite Club Backend Metrics
+  - job_name: 'bite-club-backend'
+    static_configs:
+      - targets: ['host.docker.internal:3001']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # System Metrics
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Redis Metrics
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+  # Prometheus Self-Monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+rule_files:
+  - "alert_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # Add alertmanager if needed
+          # - alertmanager:9093
