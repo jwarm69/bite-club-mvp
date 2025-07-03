@@ -1,8 +1,24 @@
-# Bite Club MVP
+# 🍕 Bite Club MVP
+
+**Status: 🚀 READY TO LAUNCH**  
+**Database: ✅ Supabase with real data**  
+**Code: ✅ Production-ready**  
+**Next: Get Stripe keys → Deploy to Railway**
 
 A smart food ordering platform for college students with advanced modifiers, restaurant-funded promotions, and AI calling system.
 
-## 🚀 Quick Start
+## ⚡ LAUNCH NOW (30 minutes)
+
+**See [LAUNCH.md](./LAUNCH.md) for complete 30-minute deployment checklist**
+
+### Critical Next Steps:
+1. **Get Stripe API keys** from Stripe Dashboard
+2. **Deploy to Railway** with environment variables  
+3. **Test live application**
+
+---
+
+## 🚀 Quick Start (Development)
 
 ### Prerequisites
 - Node.js (v16 or higher)
