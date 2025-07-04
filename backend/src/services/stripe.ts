@@ -1,9 +1,11 @@
 import Stripe from 'stripe';
 import { prisma } from '../index';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+// Gracefully handle missing Stripe keys for test deployment
+const stripeEnabled = !!process.env.STRIPE_SECRET_KEY;
+const stripe = stripeEnabled ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-05-28.basil'
-});
+}) : null;
 
 export interface CreditPurchaseData {
   userId: string;
@@ -20,6 +22,10 @@ export interface CreateCheckoutSessionData {
 
 // Create payment intent for credit purchase
 export const createCreditPaymentIntent = async (data: CreditPurchaseData) => {
+  if (!stripeEnabled || !stripe) {
+    throw new Error('Payment processing temporarily disabled - Stripe not configured');
+  }
+
   try {
     const { userId, amount, paymentMethodId } = data;
 
@@ -58,6 +64,10 @@ export const createCreditPaymentIntent = async (data: CreditPurchaseData) => {
 
 // Create checkout session for credit purchase
 export const createCreditCheckoutSession = async (data: CreateCheckoutSessionData) => {
+  if (!stripeEnabled || !stripe) {
+    throw new Error('Payment processing temporarily disabled - Stripe not configured');
+  }
+
   try {
     const { userId, amount, successUrl, cancelUrl } = data;
 
@@ -110,6 +120,10 @@ export const handleSuccessfulPayment = async (
   userId: string,
   amount: number
 ) => {
+  if (!stripeEnabled || !stripe) {
+    throw new Error('Payment processing temporarily disabled - Stripe not configured');
+  }
+
   try {
     // Verify payment with Stripe
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
@@ -184,4 +198,4 @@ export const getCustomerPaymentMethods = async (customerId: string) => {
   }
 };
 
-export { stripe };
+export { stripe, stripeEnabled };

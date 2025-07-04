@@ -6,7 +6,8 @@ import {
   createCreditCheckoutSession, 
   createCreditPaymentIntent,
   handleSuccessfulPayment,
-  stripe
+  stripe,
+  stripeEnabled
 } from '../services/stripe';
 
 const router = express.Router();
@@ -154,6 +155,11 @@ router.post('/purchase/confirm', authenticate, authorize(UserRole.STUDENT), asyn
 
 // Webhook endpoint for Stripe events
 router.post('/webhook', express.raw({ type: 'application/json' }), async (req: Request, res: Response): Promise<void> => {
+  if (!stripeEnabled || !stripe) {
+    res.status(503).json({ error: 'Payment processing temporarily disabled' });
+    return;
+  }
+
   const sig = req.headers['stripe-signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 

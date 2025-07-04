@@ -20,6 +20,7 @@ RUN npx prisma generate
 # Copy source code (exclude scripts that aren't needed for production)
 COPY src ./src
 COPY prisma ./prisma
+COPY public ./public
 COPY tsconfig.json ./
 
 # Create a production tsconfig that only includes src

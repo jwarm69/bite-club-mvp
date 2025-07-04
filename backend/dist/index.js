@@ -37,6 +37,9 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const credits_1 = __importDefault(require("./routes/credits"));
 const admin_1 = __importDefault(require("./routes/admin"));
 const restaurant_1 = __importDefault(require("./routes/restaurant"));
+const orders_1 = __importDefault(require("./routes/orders"));
+const calls_1 = __importDefault(require("./routes/calls"));
+const integrations_1 = __importDefault(require("./routes/integrations"));
 // Routes
 app.get('/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date().toISOString() });
@@ -45,6 +48,9 @@ app.use('/api/auth', auth_1.default);
 app.use('/api/credits', credits_1.default);
 app.use('/api/admin', admin_1.default);
 app.use('/api/restaurant', restaurant_1.default);
+app.use('/api/orders', orders_1.default);
+app.use('/api/calls', calls_1.default);
+app.use('/api/integrations', integrations_1.default);
 // Socket.io connection handling
 io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);

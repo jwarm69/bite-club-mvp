@@ -209,6 +209,58 @@ router.patch('/restaurants/:id/status', auth_1.authenticate, (0, auth_1.authoriz
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+// Get detailed student information for impersonation (admin only)
+router.get('/students/:id', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
+    try {
+        const { id } = req.params;
+        const student = await index_1.prisma.user.findUnique({
+            where: {
+                id,
+                role: client_1.UserRole.STUDENT
+            },
+            include: {
+                school: true,
+                orders: {
+                    include: {
+                        restaurant: true,
+                        orderItems: {
+                            include: {
+                                menuItem: true
+                            }
+                        }
+                    },
+                    orderBy: {
+                        createdAt: 'desc'
+                    }
+                }
+            }
+        });
+        if (!student) {
+            res.status(404).json({ error: 'Student not found' });
+            return;
+        }
+        // Format the response to match what the frontend expects
+        const formattedStudent = {
+            id: student.id,
+            email: student.email,
+            firstName: student.firstName,
+            lastName: student.lastName,
+            phone: student.phone,
+            role: student.role,
+            creditBalance: student.creditBalance,
+            school: student.school ? {
+                id: student.school.id,
+                name: student.school.name,
+                domain: student.school.domain
+            } : null
+        };
+        res.json({ user: formattedStudent });
+    }
+    catch (error) {
+        console.error('Get student details error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 // Add credits to student account (admin only)
 router.post('/students/:id/credits', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
@@ -310,6 +362,84 @@ router.post('/orders/:id/refund', auth_1.authenticate, (0, auth_1.authorize)(cli
     }
     catch (error) {
         console.error('Process refund error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+// Get single restaurant for editing (admin only)
+router.get('/restaurants/:id', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
+    try {
+        const { id } = req.params;
+        const restaurant = await index_1.prisma.restaurant.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                phone: true,
+                email: true,
+                active: true,
+                logoUrl: true,
+                operatingHours: true,
+                callEnabled: true,
+                school: {
+                    select: {
+                        id: true,
+                        name: true,
+                        domain: true
+                    }
+                }
+            }
+        });
+        if (!restaurant) {
+            res.status(404).json({ error: 'Restaurant not found' });
+            return;
+        }
+        res.json({ restaurant });
+    }
+    catch (error) {
+        console.error('Get restaurant error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+// Update restaurant info (admin only)
+router.put('/restaurants/:id', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, description, phone, email } = req.body;
+        if (!name || name.trim().length === 0) {
+            res.status(400).json({ error: 'Restaurant name is required' });
+            return;
+        }
+        const restaurant = await index_1.prisma.restaurant.update({
+            where: { id },
+            data: {
+                name: name.trim(),
+                description: description?.trim() || null,
+                phone: phone?.trim() || null,
+                email: email?.trim() || null
+            },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                phone: true,
+                email: true,
+                active: true,
+                school: {
+                    select: {
+                        id: true,
+                        name: true
+                    }
+                }
+            }
+        });
+        res.json({
+            success: true,
+            restaurant
+        });
+    }
+    catch (error) {
+        console.error('Update restaurant error:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

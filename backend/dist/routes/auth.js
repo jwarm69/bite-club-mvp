@@ -8,6 +8,8 @@ const client_1 = require("@prisma/client");
 const index_1 = require("../index");
 const auth_1 = require("../utils/auth");
 const auth_2 = require("../middleware/auth");
+const email_1 = require("../utils/email");
+const crypto_1 = __importDefault(require("crypto"));
 const router = express_1.default.Router();
 // Get all active schools for signup
 router.get('/schools', async (req, res) => {
@@ -278,6 +280,90 @@ router.get('/schools', async (req, res) => {
     }
     catch (error) {
         console.error('Get schools error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+// Forgot Password
+router.post('/forgot-password', async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            res.status(400).json({ error: 'Email is required' });
+            return;
+        }
+        // Find user by email
+        const user = await index_1.prisma.user.findUnique({
+            where: { email: email.toLowerCase() }
+        });
+        // Always return success for security (don't reveal if email exists)
+        if (!user) {
+            res.json({ message: 'If an account with this email exists, a password reset link has been sent.' });
+            return;
+        }
+        // Don't allow password reset for admin users
+        if (user.role === client_1.UserRole.ADMIN) {
+            res.json({ message: 'If an account with this email exists, a password reset link has been sent.' });
+            return;
+        }
+        // Generate reset token
+        const resetToken = crypto_1.default.randomBytes(32).toString('hex');
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+        // Store reset token in database
+        await index_1.prisma.passwordResetToken.create({
+            data: {
+                token: resetToken,
+                userId: user.id,
+                expiresAt
+            }
+        });
+        // Send password reset email
+        const userType = user.role === client_1.UserRole.STUDENT ? 'student' : 'restaurant';
+        await (0, email_1.sendPasswordResetEmail)(user.email, resetToken, userType);
+        res.json({ message: 'If an account with this email exists, a password reset link has been sent.' });
+    }
+    catch (error) {
+        console.error('Forgot password error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+// Reset Password
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { token, password } = req.body;
+        if (!token || !password) {
+            res.status(400).json({ error: 'Token and new password are required' });
+            return;
+        }
+        if (password.length < 6) {
+            res.status(400).json({ error: 'Password must be at least 6 characters long' });
+            return;
+        }
+        // Find and validate reset token
+        const resetToken = await index_1.prisma.passwordResetToken.findUnique({
+            where: { token },
+            include: { user: true }
+        });
+        if (!resetToken || resetToken.used || resetToken.expiresAt < new Date()) {
+            res.status(400).json({ error: 'Invalid or expired reset token' });
+            return;
+        }
+        // Hash new password
+        const passwordHash = await (0, auth_1.hashPassword)(password);
+        // Update password and mark token as used
+        await index_1.prisma.$transaction(async (tx) => {
+            await tx.user.update({
+                where: { id: resetToken.userId },
+                data: { passwordHash }
+            });
+            await tx.passwordResetToken.update({
+                where: { id: resetToken.id },
+                data: { used: true }
+            });
+        });
+        res.json({ message: 'Password reset successfully' });
+    }
+    catch (error) {
+        console.error('Reset password error:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

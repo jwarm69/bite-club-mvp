@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
+import path from 'path';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { PrismaClient } from '@prisma/client';
@@ -52,6 +53,29 @@ app.use('/api/orders', ordersRoutes);
 app.use('/api/calls', callsRoutes);
 app.use('/api/integrations', integrationsRoutes);
 
+// Debug route to check public directory
+app.get('/debug-public', (req, res) => {
+  const fs = require('fs');
+  const publicPath = path.join(__dirname, '../public');
+  try {
+    const files = fs.readdirSync(publicPath);
+    res.json({ 
+      publicPath, 
+      files,
+      indexExists: fs.existsSync(path.join(publicPath, 'index.html'))
+    });
+  } catch (error) {
+    res.json({ error: error.message, publicPath });
+  }
+});
+
+// Serve React static files
+const publicPath = process.env.NODE_ENV === 'production' 
+  ? path.join(__dirname, '../public') 
+  : path.join(__dirname, '../public');
+  
+app.use(express.static(publicPath));
+
 // Socket.io connection handling
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
@@ -63,6 +87,16 @@ io.on('connection', (socket) => {
 
 // Export io for use in other modules
 export { io };
+
+// Simple test route
+app.get('/test', (req, res) => {
+  res.send('Test route works!');
+});
+
+// Handle React routing - catch all handler: send back React's index.html file
+app.get('*', (req, res) => {
+  res.send('Catch-all route hit for: ' + req.path);
+});
 
 const PORT = process.env.PORT || 3001;
 

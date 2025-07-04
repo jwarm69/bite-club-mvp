@@ -186,5 +186,125 @@ function isRestaurantCurrentlyOpen(operatingHours) {
         return false;
     return currentTime >= todayHours.openTime && currentTime <= todayHours.closeTime;
 }
+// Public endpoints for browsing restaurants and menus
+// Get all restaurants by school
+router.get('/by-school/:schoolDomain', async (req, res) => {
+    try {
+        const { schoolDomain } = req.params;
+        // Find school by domain
+        const school = await index_1.prisma.school.findUnique({
+            where: { domain: schoolDomain, active: true }
+        });
+        if (!school) {
+            res.status(404).json({ error: 'School not found' });
+            return;
+        }
+        const restaurants = await index_1.prisma.restaurant.findMany({
+            where: {
+                schoolId: school.id,
+                active: true
+            },
+            select: {
+                id: true,
+                name: true,
+                phone: true,
+                email: true,
+                description: true,
+                logoUrl: true,
+                operatingHours: true,
+                callEnabled: true
+            },
+            orderBy: { name: 'asc' }
+        });
+        res.json({ restaurants });
+    }
+    catch (error) {
+        console.error('Get restaurants by school error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+// Get restaurant details with menu
+router.get('/:restaurantId/menu', async (req, res) => {
+    try {
+        const { restaurantId } = req.params;
+        const restaurant = await index_1.prisma.restaurant.findUnique({
+            where: {
+                id: restaurantId,
+                active: true
+            },
+            select: {
+                id: true,
+                name: true,
+                phone: true,
+                email: true,
+                description: true,
+                logoUrl: true,
+                operatingHours: true,
+                callEnabled: true,
+                menuItems: {
+                    where: { available: true },
+                    select: {
+                        id: true,
+                        name: true,
+                        description: true,
+                        price: true,
+                        category: true,
+                        imageUrl: true,
+                        modifiers: true
+                    },
+                    orderBy: [
+                        { category: 'asc' },
+                        { name: 'asc' }
+                    ]
+                }
+            }
+        });
+        if (!restaurant) {
+            res.status(404).json({ error: 'Restaurant not found' });
+            return;
+        }
+        res.json({ restaurant });
+    }
+    catch (error) {
+        console.error('Get restaurant menu error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+// Get all restaurants (for browsing)
+router.get('/', async (req, res) => {
+    try {
+        const { schoolId } = req.query;
+        const whereClause = { active: true };
+        if (schoolId) {
+            whereClause.schoolId = schoolId;
+        }
+        const restaurants = await index_1.prisma.restaurant.findMany({
+            where: whereClause,
+            select: {
+                id: true,
+                name: true,
+                phone: true,
+                email: true,
+                description: true,
+                logoUrl: true,
+                operatingHours: true,
+                callEnabled: true,
+                school: {
+                    select: {
+                        id: true,
+                        name: true,
+                        domain: true
+                    }
+                }
+            },
+            orderBy: { name: 'asc' }
+        });
+        res.json({ restaurants });
+    }
+    catch (error) {
+        console.error('Get restaurants error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 exports.default = router;
 //# sourceMappingURL=restaurant.js.map
