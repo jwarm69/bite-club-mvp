@@ -3,7 +3,7 @@ services:
   - type: web
     name: bite-club-backend
     runtime: docker
-    repo: https://github.com/jwarman69/bite-club-mvp.git  # Update with your actual GitHub repo
+    repo: https://github.com/jwarm69/bite-club-mvp.git
     dockerfilePath: ./backend/Dockerfile.prod
     region: oregon
     plan: starter
@@ -56,7 +56,7 @@ services:
   - type: web
     name: bite-club-frontend
     runtime: docker
-    repo: https://github.com/jwarman69/bite-club-mvp.git  # Update with your actual GitHub repo
+    repo: https://github.com/jwarm69/bite-club-mvp.git
     dockerfilePath: ./frontend/Dockerfile
     region: oregon
     plan: starter
@@ -72,3 +72,4 @@ services:
     region: oregon
     plan: starter
     maxmemoryPolicy: allkeys-lru
+    ipAllowList: []  # Empty array allows access from any Render service
