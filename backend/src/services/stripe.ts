@@ -171,7 +171,7 @@ export const processRefund = async (
   amount?: number // Optional partial refund amount
 ) => {
   try {
-    const refund = await stripe.refunds.create({
+    const refund = await stripe!.refunds.create({
       payment_intent: paymentIntentId,
       amount: amount ? Math.round(amount * 100) : undefined // Convert to cents if specified
     });
@@ -186,7 +186,7 @@ export const processRefund = async (
 // Get customer payment methods
 export const getCustomerPaymentMethods = async (customerId: string) => {
   try {
-    const paymentMethods = await stripe.paymentMethods.list({
+    const paymentMethods = await stripe!.paymentMethods.list({
       customer: customerId,
       type: 'card',
     });

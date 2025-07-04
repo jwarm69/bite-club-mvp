@@ -65,7 +65,7 @@ app.get('/debug-public', (req, res) => {
       indexExists: fs.existsSync(path.join(publicPath, 'index.html'))
     });
   } catch (error) {
-    res.json({ error: error.message, publicPath });
+    res.json({ error: error instanceof Error ? error.message : 'Unknown error', publicPath });
   }
 });
 

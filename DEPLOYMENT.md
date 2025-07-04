@@ -1,69 +1,309 @@
-# 🚀 Bite Club Deployment Guide
+# 🚀 Bite Club MVP Deployment Guide
 
-## Quick Deploy to Railway
+This guide covers deploying the Bite Club MVP application to the internet using Docker containers.
 
-### 1. Prerequisites
-- GitHub account
-- Railway account (free at railway.app)
-- Your environment variables ready
+## 📋 Prerequisites
 
-### 2. Deploy Steps
+- Docker and Docker Compose installed
+- A production database (Supabase or PostgreSQL)
+- Domain name (optional, can use Railway/Heroku provided domains)
+- Stripe account with live API keys
+- Email service credentials
 
-#### A. Push to GitHub
+## 🏗️ Production Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│    Frontend     │    │     Backend     │    │   Database      │
+│   (React/Nginx) │◄──►│  (Node.js/API)  │◄──►│  (Supabase)     │
+│   Port 80       │    │   Port 3001     │    │   Remote        │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       
+         └───────────────────────┼───────────────────────
+                                 │
+                        ┌─────────────────┐
+                        │     Redis       │
+                        │  (In-Memory)    │
+                        └─────────────────┘
+```
+
+## 🌐 Deployment Options
+
+### Option 1: Railway (Recommended - Easiest)
+
+1. **Prepare Environment**
+   ```bash
+   cp .env.production.template .env.production
+   # Edit .env.production with your actual values
+   ```
+
+2. **Create Railway Project**
+   ```bash
+   # Install Railway CLI
+   npm install -g @railway/cli
+   
+   # Login to Railway
+   railway login
+   
+   # Initialize project
+   railway init
+   ```
+
+3. **Deploy**
+   ```bash
+   # Deploy using Docker Compose
+   railway up --detach
+   ```
+
+### Option 2: DigitalOcean App Platform
+
+1. **Create App**
+   - Connect GitHub repository
+   - Select "Docker Compose" as build method
+   - Configure environment variables
+
+2. **Environment Variables**
+   ```bash
+   DATABASE_URL=your_supabase_connection_string
+   JWT_SECRET=your_strong_jwt_secret
+   STRIPE_SECRET_KEY=sk_live_...
+   STRIPE_PUBLISHABLE_KEY=pk_live_...
+   # ... other variables from .env.production.template
+   ```
+
+### Option 3: VPS Deployment (DigitalOcean Droplet)
+
+1. **Server Setup**
+   ```bash
+   # On your VPS
+   sudo apt update
+   sudo apt install docker.io docker-compose-v2
+   sudo usermod -aG docker $USER
+   ```
+
+2. **Deploy Application**
+   ```bash
+   # Clone repository
+   git clone https://github.com/your-username/bite-club-mvp.git
+   cd bite-club-mvp
+   
+   # Configure environment
+   cp .env.production.template .env.production
+   # Edit .env.production
+   
+   # Deploy
+   ./deploy.sh
+   ```
+
+## 🔧 Local Production Testing
+
+Test your production build locally before deploying:
+
 ```bash
-# If you haven't already:
-gh repo create bite-club-mvp --public
-git remote add origin https://github.com/YOUR_USERNAME/bite-club-mvp.git
-git push -u origin main
+# 1. Configure environment
+cp .env.production.template .env.production
+# Edit with your production values
+
+# 2. Build and deploy locally
+./deploy.sh
+
+# 3. Check status
+./deploy.sh status
+
+# 4. View logs
+./deploy.sh logs
+
+# 5. Stop when done testing
+./deploy.sh stop
 ```
 
-#### B. Deploy to Railway
-1. Go to [railway.app](https://railway.app)
-2. Click "Deploy from GitHub repo"
-3. Select your `bite-club-mvp` repository
-4. Railway will auto-detect Docker configuration
+## 🔒 Security Configuration
 
-#### C. Set Environment Variables
-In Railway dashboard, add these variables:
+### Required Environment Variables
+
+```bash
+# Database
+DATABASE_URL="postgresql://user:pass@host:5432/db"
+
+# JWT - MUST be strong in production
+JWT_SECRET="your-super-strong-secret-min-32-chars"
+
+# Stripe Live Keys
+STRIPE_SECRET_KEY="sk_live_..."
+STRIPE_PUBLISHABLE_KEY="pk_live_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+
+# URLs - Update with your actual domains
+FRONTEND_URL="https://yourdomain.com"
+REACT_APP_API_URL="https://api.yourdomain.com/api"
 ```
-DATABASE_URL=your_supabase_connection_string
-JWT_SECRET=your_secure_jwt_secret
-STRIPE_SECRET_KEY=sk_live_your_stripe_key
-STRIPE_PUBLISHABLE_KEY=pk_live_your_stripe_key
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_token
-TWILIO_PHONE_NUMBER=+1234567890
+
+### SSL/HTTPS Setup
+
+For VPS deployments, use Traefik for automatic SSL:
+
+```yaml
+# Add to docker-compose.prod.yml
+services:
+  traefik:
+    image: traefik:v2.9
+    command:
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=your@email.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+
+  frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(\`yourdomain.com\`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
 ```
 
-#### D. Deploy Services
-Railway will create:
-- **Backend service** (from backend/Dockerfile)
-- **Frontend service** (from frontend/Dockerfile)
-- **Redis service** (for caching)
+## 📊 Monitoring & Health Checks
 
-### 3. Custom Domain (Optional)
-- Add your domain in Railway dashboard
-- Point DNS to Railway's provided URL
-- SSL certificates are automatic
+The application includes built-in health checks:
 
-## Production URLs
-- **Frontend**: https://bite-club-frontend.railway.app
-- **Backend API**: https://bite-club-backend.railway.app
-- **Admin Panel**: https://bite-club-frontend.railway.app/admin
+- **Backend**: `http://localhost:3001/health`
+- **Frontend**: `http://localhost/`
+- **Automatic restarts** on failure
 
-## Monitoring
-- Railway provides built-in metrics
-- Add Sentry for error tracking
-- Set up uptime monitoring
+### View Application Status
 
-## Scaling
-- Railway auto-scales based on traffic
-- Upgrade plan as you grow
-- Database (Supabase) scales independently
+```bash
+# Container status
+./deploy.sh status
 
-## Support
-- Railway docs: [docs.railway.app](https://docs.railway.app)
-- Bite Club issues: Create GitHub issue
+# Application logs
+./deploy.sh logs
 
----
-*Deployed with Railway + Docker 🚀*
+# Health checks
+./deploy.sh health
+```
+
+## 🔄 Deployment Workflow
+
+### Initial Deployment
+
+1. **Configure Environment**
+   ```bash
+   cp .env.production.template .env.production
+   # Fill in all production values
+   ```
+
+2. **Deploy**
+   ```bash
+   ./deploy.sh deploy
+   ```
+
+### Updates & Maintenance
+
+```bash
+# Pull latest code
+git pull origin main
+
+# Redeploy with new code
+./deploy.sh deploy
+
+# Or just rebuild images
+./deploy.sh build
+
+# Restart without rebuilding
+./deploy.sh restart
+```
+
+### Rollback Strategy
+
+```bash
+# Stop current deployment
+./deploy.sh stop
+
+# Switch to previous version
+git checkout previous-working-commit
+
+# Redeploy
+./deploy.sh deploy
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Database Connection Failed**
+   ```bash
+   # Check DATABASE_URL format
+   postgresql://username:password@host:5432/database
+   ```
+
+2. **Frontend Can't Reach Backend**
+   ```bash
+   # Verify REACT_APP_API_URL in .env.production
+   REACT_APP_API_URL="https://your-backend-domain.com/api"
+   ```
+
+3. **SSL Certificate Issues**
+   ```bash
+   # For Railway/Heroku: Automatic HTTPS
+   # For VPS: Use Traefik or Cloudflare
+   ```
+
+### Debug Commands
+
+```bash
+# View detailed logs
+docker compose -f docker-compose.prod.yml logs -f
+
+# Execute commands in containers
+docker compose -f docker-compose.prod.yml exec backend sh
+docker compose -f docker-compose.prod.yml exec frontend sh
+
+# Check environment variables
+docker compose -f docker-compose.prod.yml exec backend printenv
+```
+
+## 💰 Cost Estimates
+
+| Platform | Monthly Cost | Features |
+|----------|-------------|----------|
+| Railway | $5-20 | Auto-deployments, HTTPS, Monitoring |
+| DigitalOcean App | $12-25 | Managed platform, Auto-scaling |
+| VPS (Droplet) | $6-12 | Full control, Manual setup |
+| Heroku | $7-25 | Easy setup, Add-ons available |
+
+## 🎯 Production Checklist
+
+- [ ] Production database configured
+- [ ] All environment variables set
+- [ ] Stripe live keys configured
+- [ ] Domain name configured
+- [ ] SSL/HTTPS enabled
+- [ ] Health checks passing
+- [ ] Monitoring/logging set up
+- [ ] Backup strategy in place
+- [ ] Error tracking configured (optional)
+
+## 📞 Support
+
+For deployment issues:
+
+1. Check the deployment logs: `./deploy.sh logs`
+2. Verify environment configuration
+3. Test production build locally first
+4. Review this deployment guide
+
+## 🔗 Quick Links
+
+- **Railway**: https://railway.app
+- **DigitalOcean**: https://www.digitalocean.com/products/app-platform
+- **Supabase**: https://supabase.com
+- **Stripe**: https://stripe.com
+- **Docker**: https://docs.docker.com

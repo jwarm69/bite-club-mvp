@@ -126,12 +126,12 @@ router.post('/purchase/confirm', authenticate, authorize(UserRole.STUDENT), asyn
 
     if (paymentIntentId) {
       // Handle Payment Intent confirmation
-      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+      const paymentIntent = await stripe!.paymentIntents.retrieve(paymentIntentId);
       amount = paymentIntent.amount / 100; // Convert from cents
       stripePaymentId = paymentIntentId;
     } else if (sessionId) {
       // Handle Checkout Session confirmation
-      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      const session = await stripe!.checkout.sessions.retrieve(sessionId);
       amount = (session.amount_total || 0) / 100; // Convert from cents
       stripePaymentId = session.payment_intent as string;
     } else {

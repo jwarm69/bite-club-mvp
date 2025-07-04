@@ -1,0 +1,74 @@
+services:
+  # Backend API Service
+  - type: web
+    name: bite-club-backend
+    runtime: docker
+    repo: https://github.com/jwarman69/bite-club-mvp.git  # Update with your actual GitHub repo
+    dockerfilePath: ./backend/Dockerfile.prod
+    region: oregon
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DATABASE_URL
+        value: postgresql://postgres:xetvoz-6kaffi-ruzPiq@db.emkzjglkxshkhtcohngc.supabase.co:5432/postgres
+      - key: JWT_SECRET
+        value: bite-club-super-secret-jwt-key-development-only
+      - key: STRIPE_SECRET_KEY
+        value: sk_test_your_stripe_secret_key
+      - key: STRIPE_PUBLISHABLE_KEY
+        value: pk_test_your_stripe_publishable_key
+      - key: STRIPE_WEBHOOK_SECRET
+        value: whsec_your_webhook_secret
+      - key: TWILIO_ACCOUNT_SID
+        value: AC00000000000000000000000000000000
+      - key: TWILIO_AUTH_TOKEN
+        value: demo-auth-token
+      - key: TWILIO_PHONE_NUMBER
+        value: +1234567890
+      - key: OPENAI_API_KEY
+        value: your-openai-api-key
+      - key: EMAIL_FROM
+        value: noreply@biteclub.com
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USER
+        value: your-email@gmail.com
+      - key: EMAIL_PASS
+        value: your-email-password
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: bite-club-frontend
+          property: host
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: bite-club-redis
+          property: connectionString
+    healthCheckPath: /health
+
+  # Frontend Web Service (Better for React Router)
+  - type: web
+    name: bite-club-frontend
+    runtime: docker
+    repo: https://github.com/jwarman69/bite-club-mvp.git  # Update with your actual GitHub repo
+    dockerfilePath: ./frontend/Dockerfile
+    region: oregon
+    plan: starter
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://bite-club-backend.onrender.com/api
+      - key: REACT_APP_STRIPE_PUBLISHABLE_KEY
+        value: pk_test_your_stripe_publishable_key
+
+  # Redis Cache Service
+  - type: redis
+    name: bite-club-redis
+    region: oregon
+    plan: starter
+    maxmemoryPolicy: allkeys-lru
