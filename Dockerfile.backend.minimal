@@ -1,0 +1,14 @@
+# Minimal working backend for Render
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Create a minimal Express server
+RUN echo 'const express = require("express"); const app = express(); app.get("/health", (req, res) => res.json({status: "ok"})); app.listen(process.env.PORT || 3001, () => console.log("Server running"));' > server.js
+
+# Install express
+RUN npm init -y && npm install express
+
+EXPOSE 3001
+
+CMD ["node", "server.js"]
