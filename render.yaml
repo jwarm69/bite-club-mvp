@@ -5,6 +5,7 @@ services:
     runtime: docker
     repo: https://github.com/jwarm69/bite-club-mvp.git
     dockerfilePath: ./backend/Dockerfile.prod
+    dockerContext: ./backend
     region: oregon
     plan: starter
     envVars:
@@ -57,7 +58,8 @@ services:
     name: bite-club-frontend
     runtime: docker
     repo: https://github.com/jwarm69/bite-club-mvp.git
-    dockerfilePath: ./frontend/Dockerfile
+    dockerfilePath: ./frontend/Dockerfile.prod
+    dockerContext: ./frontend
     region: oregon
     plan: starter
     envVars:
