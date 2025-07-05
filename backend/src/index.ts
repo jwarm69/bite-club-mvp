@@ -20,27 +20,36 @@ const io = new Server(server, {
 });
 
 // Lazy Prisma initialization - start server first, connect DB later
-let prisma: PrismaClient | null = null;
+let realPrisma: PrismaClient | null = null;
 
 export async function getPrisma(): Promise<PrismaClient> {
-  if (!prisma) {
+  if (!realPrisma) {
     try {
       console.log('🔄 Initializing Prisma connection...');
-      prisma = new PrismaClient({
+      realPrisma = new PrismaClient({
         log: ['error', 'warn'],
       });
-      await prisma.$connect();
+      await realPrisma.$connect();
+      
+      // Update the exported prisma variable for backward compatibility
+      Object.assign(prisma, realPrisma);
+      
       console.log('✅ Database connected successfully!');
     } catch (error) {
       console.error('❌ Database connection failed:', error.message);
       throw error;
     }
   }
-  return prisma;
+  return realPrisma;
 }
 
-// Legacy export for compatibility (will be removed)
-export const prismaLegacy = null;
+// Mock Prisma client for compilation and initial startup
+// Gets replaced with real client when getPrisma() is first called
+export let prisma = {
+  user: { findMany: () => Promise.reject(new Error('Database not initialized')) },
+  restaurant: { findMany: () => Promise.reject(new Error('Database not initialized')) },
+  school: { findMany: () => Promise.reject(new Error('Database not initialized')) },
+} as any;
 
 // Middleware
 app.use(helmet());
