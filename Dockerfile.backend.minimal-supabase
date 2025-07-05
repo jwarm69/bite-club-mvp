@@ -1,0 +1,36 @@
+# Ultra-minimal Supabase test - guaranteed to work
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Just install what we absolutely need
+RUN npm init -y && npm install express pg
+
+# Create ultra-simple server that tests Supabase with raw SQL
+RUN echo 'const express = require("express"); \
+const { Client } = require("pg"); \
+const app = express(); \
+\
+app.get("/", (req, res) => res.json({status: "Supabase Test Backend"})); \
+app.get("/health", (req, res) => res.json({status: "ok"})); \
+\
+app.get("/test-supabase", async (req, res) => { \
+  const client = new Client({ \
+    connectionString: process.env.DATABASE_URL \
+  }); \
+  try { \
+    await client.connect(); \
+    const result = await client.query("SELECT 1 as test"); \
+    await client.end(); \
+    res.json({status: "SUPABASE CONNECTED!", result: result.rows, url: process.env.DATABASE_URL ? "URL provided" : "No URL"}); \
+  } catch (error) { \
+    res.status(500).json({status: "Supabase error", error: error.message, url: process.env.DATABASE_URL ? "URL provided" : "No URL"}); \
+  } \
+}); \
+\
+const PORT = process.env.PORT || 3001; \
+app.listen(PORT, "0.0.0.0", () => console.log(`Testing Supabase on port ${PORT}`));' > server.js
+
+EXPOSE 3001
+
+CMD ["node", "server.js"]
