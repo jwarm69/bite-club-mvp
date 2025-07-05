@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.io = exports.prisma = void 0;
+exports.getPrisma = getPrisma;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
@@ -23,8 +24,34 @@ const io = new socket_io_1.Server(server, {
     }
 });
 exports.io = io;
-// Initialize Prisma
-exports.prisma = new client_1.PrismaClient();
+// Lazy Prisma initialization - start server first, connect DB later
+let realPrisma = null;
+async function getPrisma() {
+    if (!realPrisma) {
+        try {
+            console.log('🔄 Initializing Prisma connection...');
+            realPrisma = new client_1.PrismaClient({
+                log: ['error', 'warn'],
+            });
+            await realPrisma.$connect();
+            // Update the exported prisma variable for backward compatibility
+            Object.assign(exports.prisma, realPrisma);
+            console.log('✅ Database connected successfully!');
+        }
+        catch (error) {
+            console.error('❌ Database connection failed:', error.message);
+            throw error;
+        }
+    }
+    return realPrisma;
+}
+// Mock Prisma client for compilation and initial startup
+// Gets replaced with real client when getPrisma() is first called
+exports.prisma = {
+    user: { findMany: () => Promise.reject(new Error('Database not initialized')) },
+    restaurant: { findMany: () => Promise.reject(new Error('Database not initialized')) },
+    school: { findMany: () => Promise.reject(new Error('Database not initialized')) },
+};
 // Middleware
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)({
@@ -44,6 +71,27 @@ const integrations_1 = __importDefault(require("./routes/integrations"));
 // Routes
 app.get('/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+// Database connection test endpoint
+app.get('/test-db', async (req, res) => {
+    try {
+        const db = await getPrisma();
+        const userCount = await db.user.count();
+        const restaurantCount = await db.restaurant.count();
+        res.json({
+            status: 'Database connected!',
+            users: userCount,
+            restaurants: restaurantCount,
+            timestamp: new Date().toISOString()
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            status: 'Database connection failed',
+            error: error.message,
+            timestamp: new Date().toISOString()
+        });
+    }
 });
 app.use('/api/auth', auth_1.default);
 app.use('/api/credits', credits_1.default);

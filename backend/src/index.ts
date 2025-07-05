@@ -35,7 +35,7 @@ export async function getPrisma(): Promise<PrismaClient> {
       Object.assign(prisma, realPrisma);
       
       console.log('✅ Database connected successfully!');
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ Database connection failed:', error.message);
       throw error;
     }
@@ -86,7 +86,7 @@ app.get('/test-db', async (req, res) => {
       restaurants: restaurantCount,
       timestamp: new Date().toISOString()
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({ 
       status: 'Database connection failed', 
       error: error.message,
@@ -114,7 +114,7 @@ app.get('/debug-public', (req, res) => {
       files,
       indexExists: fs.existsSync(path.join(publicPath, 'index.html'))
     });
-  } catch (error) {
+  } catch (error: any) {
     res.json({ error: error instanceof Error ? error.message : 'Unknown error', publicPath });
   }
 });
