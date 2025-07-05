@@ -1,0 +1,69 @@
+# Mission-critical backend with Supabase connectivity - start server first, then DB
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY backend/package*.json ./
+
+# Install ALL dependencies (don't remove any - avoid breaking Prisma)
+RUN npm ci
+
+# Copy Prisma schema and generate client
+COPY backend/prisma ./prisma
+RUN npx prisma generate
+
+# Copy source files and build
+COPY backend/src ./src
+COPY backend/tsconfig.json ./
+RUN npx tsc
+
+# Don't run npm ci --only=production - it breaks Prisma dependencies!
+
+# Create a startup script that starts Express first, then tests DB
+RUN echo 'const express = require("express"); \
+const { PrismaClient } = require("@prisma/client"); \
+const app = express(); \
+app.use(express.json()); \
+\
+// Start server FIRST (health checks work immediately) \
+const PORT = process.env.PORT || 3001; \
+app.listen(PORT, "0.0.0.0", () => { \
+  console.log(`🚀 Server running on port ${PORT}`); \
+  console.log(`🔗 Testing Supabase connection...`); \
+  testDatabase(); \
+}); \
+\
+// Health check endpoint (works immediately) \
+app.get("/health", (req, res) => { \
+  res.json({status: "ok", timestamp: new Date().toISOString()}); \
+}); \
+\
+// Database test endpoint \
+app.get("/test-db", async (req, res) => { \
+  try { \
+    const prisma = new PrismaClient(); \
+    await prisma.$connect(); \
+    const result = await prisma.$queryRaw`SELECT 1 as test`; \
+    await prisma.$disconnect(); \
+    res.json({status: "Database connected!", result, url: process.env.DATABASE_URL ? "URL provided" : "No URL"}); \
+  } catch (error) { \
+    res.status(500).json({status: "Database error", error: error.message, url: process.env.DATABASE_URL ? "URL provided" : "No URL"}); \
+  } \
+}); \
+\
+// Test database connection async (does not crash server if fails) \
+async function testDatabase() { \
+  try { \
+    const prisma = new PrismaClient(); \
+    await prisma.$connect(); \
+    console.log("✅ Supabase connected successfully!"); \
+    await prisma.$disconnect(); \
+  } catch (error) { \
+    console.error("❌ Supabase connection failed:", error.message); \
+  } \
+}' > server.js
+
+EXPOSE 3001
+
+CMD ["node", "server.js"]
