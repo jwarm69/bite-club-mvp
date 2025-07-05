@@ -1,0 +1,30 @@
+# Fixed backend build - generate Prisma client first, then build TypeScript
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files for dependency installation
+COPY backend/package*.json ./
+
+# Install dependencies (including dev for TypeScript build)
+RUN npm ci
+
+# Copy Prisma schema FIRST
+COPY backend/prisma ./prisma
+
+# Generate Prisma Client BEFORE TypeScript compilation
+RUN npx prisma generate
+
+# Copy source files AFTER Prisma client is generated
+COPY backend/src ./src
+COPY backend/tsconfig.json ./
+
+# Now build TypeScript (with Prisma types available)
+RUN npx tsc
+
+# Clean up dev dependencies for smaller image
+RUN npm ci --only=production && npm cache clean --force
+
+EXPOSE 3001
+
+CMD ["node", "dist/index.js"]

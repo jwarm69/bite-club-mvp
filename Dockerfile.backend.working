@@ -1,0 +1,32 @@
+# Working backend build for Render - tested locally first
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files for dependency installation
+COPY backend/package*.json ./
+
+# Install dependencies (including dev for TypeScript build)
+RUN npm ci
+
+# Copy source files
+COPY backend/src ./src
+COPY backend/prisma ./prisma
+COPY backend/tsconfig.json ./
+
+# Build TypeScript
+RUN npx tsc
+
+# Generate Prisma Client (ensure we have the right binaries)
+RUN npx prisma generate
+
+# Clean up dev dependencies for smaller image
+RUN npm ci --only=production
+
+EXPOSE 3001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "const http=require('http');http.get('http://localhost:3001/health',(r)=>{process.exit(r.statusCode===200?0:1)}).on('error',()=>{process.exit(1)})"
+
+CMD ["node", "dist/index.js"]
