@@ -13,7 +13,7 @@ services:
       - key: PORT
         value: 3001
       - key: DATABASE_URL
-        value: postgresql://postgres:xetvoz-6kaffi-ruzPiq@db.emkzjglkxshkhtcohngc.supabase.co:5432/postgres
+        value: postgresql://postgres.emkzjglkxshkhtcohngc:xetvoz-6kaffi-ruzPiq@aws-0-us-east-2.pooler.supabase.com:5432/postgres?pgbouncer=true
       - key: JWT_SECRET
         value: bite-club-super-secret-jwt-key-development-only
       - key: STRIPE_SECRET_KEY

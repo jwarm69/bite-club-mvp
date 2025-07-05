@@ -1,0 +1,50 @@
+# Force IPv4 connection to Supabase
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies
+RUN npm init -y && npm install express pg
+
+# Create server that forces IPv4 connection
+RUN echo 'const express = require("express"); \
+const { Client } = require("pg"); \
+const app = express(); \
+\
+app.get("/", (req, res) => res.json({status: "Supabase IPv4 Backend"})); \
+app.get("/health", (req, res) => res.json({status: "ok"})); \
+\
+app.get("/test-supabase", async (req, res) => { \
+  // Parse the connection string and force IPv4 \
+  const dbUrl = process.env.DATABASE_URL; \
+  if (!dbUrl) return res.status(500).json({error: "No DATABASE_URL"}); \
+  \
+  // Force IPv4 by using IP address directly \
+  const ipv4Url = dbUrl.replace("db.emkzjglkxshkhtcohngc.supabase.co", "54.159.228.39"); \
+  \
+  const client = new Client({ connectionString: ipv4Url }); \
+  try { \
+    await client.connect(); \
+    const result = await client.query("SELECT current_database(), version()"); \
+    await client.end(); \
+    res.json({ \
+      status: "SUPABASE CONNECTED!", \
+      database: result.rows[0], \
+      original_url: dbUrl.replace(/:[^:@]+@/, ":***@"), \
+      using_ipv4: true \
+    }); \
+  } catch (error) { \
+    res.status(500).json({ \
+      status: "Connection failed", \
+      error: error.message, \
+      url_format: dbUrl ? dbUrl.replace(/:[^:@]+@/, ":***@") : "none" \
+    }); \
+  } \
+}); \
+\
+const PORT = process.env.PORT || 3001; \
+app.listen(PORT, "0.0.0.0", () => console.log(`IPv4 backend on port ${PORT}`));' > server.js
+
+EXPOSE 3001
+
+CMD ["node", "server.js"]
