@@ -1,0 +1,78 @@
+# Gradual API deployment - start with working endpoints, add DB slowly
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install minimal dependencies
+RUN npm init -y && npm install express cors helmet dotenv
+
+# Create a gradual backend that mimics your real API structure
+RUN echo 'const express = require("express"); \
+const cors = require("cors"); \
+const helmet = require("helmet"); \
+require("dotenv").config(); \
+\
+const app = express(); \
+\
+// Middleware matching your real backend \
+app.use(helmet()); \
+app.use(cors({ \
+  origin: process.env.FRONTEND_URL || "http://localhost:3000", \
+  credentials: true \
+})); \
+app.use(express.json({ limit: "10mb" })); \
+app.use(express.urlencoded({ extended: true })); \
+\
+// Health check \
+app.get("/health", (req, res) => { \
+  res.json({ status: "OK", timestamp: new Date().toISOString() }); \
+}); \
+\
+// Mock API endpoints that your frontend expects \
+app.post("/api/auth/login", (req, res) => { \
+  res.status(401).json({ error: "Database connection in progress..." }); \
+}); \
+\
+app.get("/api/restaurants", (req, res) => { \
+  res.json([ \
+    { id: 1, name: "Gator Corner Dining Center", status: "active" }, \
+    { id: 2, name: "The Fresh Food Company", status: "active" }, \
+    { id: 3, name: "Broward Dining", status: "active" } \
+  ]); \
+}); \
+\
+app.get("/api/admin/restaurants", (req, res) => { \
+  res.json({ message: "Admin endpoint available" }); \
+}); \
+\
+// Test Supabase connection \
+app.get("/test-supabase", async (req, res) => { \
+  try { \
+    const { Client } = require("pg"); \
+    const client = new Client({ connectionString: process.env.DATABASE_URL }); \
+    await client.connect(); \
+    const result = await client.query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '\''public'\''"); \
+    await client.end(); \
+    res.json({ status: "SUPABASE CONNECTED!", table_count: result.rows[0].count }); \
+  } catch (error) { \
+    res.status(500).json({ status: "Connection error", error: error.message }); \
+  } \
+}); \
+\
+// Catch all \
+app.get("*", (req, res) => { \
+  res.json({ message: "Bite Club API", path: req.path, available: true }); \
+}); \
+\
+const PORT = process.env.PORT || 3001; \
+app.listen(PORT, "0.0.0.0", () => { \
+  console.log(`🚀 Gradual API server running on port ${PORT}`); \
+  console.log(`🔗 Testing Supabase connection...`); \
+});' > server.js
+
+# Install pg for database testing
+RUN npm install pg
+
+EXPOSE 3001
+
+CMD ["node", "server.js"]

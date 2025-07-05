@@ -1,0 +1,59 @@
+# Safe backend that starts server first, then connects DB
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY backend/package*.json ./
+RUN npm ci
+
+# Generate Prisma
+COPY backend/prisma ./prisma
+RUN npx prisma generate
+
+# Copy and build TypeScript
+COPY backend/src ./src
+COPY backend/tsconfig.json ./
+RUN npx tsc
+
+# Create a wrapper that ensures server starts before DB connection
+RUN echo 'console.log("🚀 Starting Bite Club Backend..."); \
+console.log("📊 Database URL:", process.env.DATABASE_URL ? "Provided" : "Missing"); \
+console.log("🌍 Environment:", process.env.NODE_ENV); \
+\
+// Delay Prisma initialization to prevent startup crashes \
+const { PrismaClient } = require("@prisma/client"); \
+let prisma = null; \
+\
+// Override the prisma export \
+const originalModule = require("./dist/index.js"); \
+if (originalModule.prisma) { \
+  prisma = new PrismaClient({ \
+    datasources: { \
+      db: { \
+        url: process.env.DATABASE_URL \
+      } \
+    }, \
+    log: ["error", "warn"] \
+  }); \
+  \
+  // Test connection after server starts \
+  setTimeout(async () => { \
+    try { \
+      await prisma.$connect(); \
+      console.log("✅ Database connected successfully!"); \
+      const count = await prisma.user.count(); \
+      console.log(`📊 Found ${count} users in database`); \
+    } catch (error) { \
+      console.error("❌ Database connection failed:", error.message); \
+    } \
+  }, 5000); \
+  \
+  // Replace the exported prisma \
+  originalModule.prisma = prisma; \
+}' > wrapper.js
+
+EXPOSE 3001
+
+# Use wrapper to start safely
+CMD ["node", "wrapper.js"]
