@@ -19,8 +19,28 @@ const io = new Server(server, {
   }
 });
 
-// Initialize Prisma
-export const prisma = new PrismaClient();
+// Lazy Prisma initialization - start server first, connect DB later
+let prisma: PrismaClient | null = null;
+
+export async function getPrisma(): Promise<PrismaClient> {
+  if (!prisma) {
+    try {
+      console.log('🔄 Initializing Prisma connection...');
+      prisma = new PrismaClient({
+        log: ['error', 'warn'],
+      });
+      await prisma.$connect();
+      console.log('✅ Database connected successfully!');
+    } catch (error) {
+      console.error('❌ Database connection failed:', error.message);
+      throw error;
+    }
+  }
+  return prisma;
+}
+
+// Legacy export for compatibility (will be removed)
+export const prismaLegacy = null;
 
 // Middleware
 app.use(helmet());
@@ -43,6 +63,27 @@ import integrationsRoutes from './routes/integrations';
 // Routes
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Database connection test endpoint
+app.get('/test-db', async (req, res) => {
+  try {
+    const db = await getPrisma();
+    const userCount = await db.user.count();
+    const restaurantCount = await db.restaurant.count();
+    res.json({ 
+      status: 'Database connected!', 
+      users: userCount,
+      restaurants: restaurantCount,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      status: 'Database connection failed', 
+      error: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
 });
 
 app.use('/api/auth', authRoutes);
