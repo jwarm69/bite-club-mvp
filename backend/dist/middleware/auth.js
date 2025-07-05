@@ -13,7 +13,7 @@ const authenticate = async (req, res, next) => {
         }
         const payload = (0, auth_1.verifyToken)(token);
         // Verify user still exists and is active
-        const user = await index_1.prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { id: payload.userId, active: true }
         });
         if (!user) {

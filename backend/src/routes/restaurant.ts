@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { UserRole } from '@prisma/client';
-import { prisma } from '../index';
+import { getPrisma } from '../index';
 import { authenticate, authorize } from '../middleware/auth';
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router.get('/orders/active-count', authenticate, authorize(UserRole.RESTAURANT),
     const userId = req.user!.userId;
 
     // Find restaurant owned by this user
-    const restaurant = await prisma.restaurant.findFirst({
+    const restaurant = await (await getPrisma()).restaurant.findFirst({
       where: { userId },
       select: { id: true }
     });
@@ -22,7 +22,7 @@ router.get('/orders/active-count', authenticate, authorize(UserRole.RESTAURANT),
     }
 
     // Count active orders (not completed, cancelled, or refunded)
-    const activeOrderCount = await prisma.order.count({
+    const activeOrderCount = await (await getPrisma()).order.count({
       where: {
         restaurantId: restaurant.id,
         status: {
@@ -43,7 +43,7 @@ router.get('/hours', authenticate, authorize(UserRole.RESTAURANT), async (req: R
   try {
     const userId = req.user!.userId;
 
-    const restaurant = await prisma.restaurant.findFirst({
+    const restaurant = await (await getPrisma()).restaurant.findFirst({
       where: { userId },
       select: {
         id: true,
@@ -86,7 +86,7 @@ router.put('/hours', authenticate, authorize(UserRole.RESTAURANT), async (req: R
       return;
     }
 
-    const restaurant = await prisma.restaurant.findFirst({
+    const restaurant = await (await getPrisma()).restaurant.findFirst({
       where: { userId }
     });
 
@@ -95,7 +95,7 @@ router.put('/hours', authenticate, authorize(UserRole.RESTAURANT), async (req: R
       return;
     }
 
-    const updatedRestaurant = await prisma.restaurant.update({
+    const updatedRestaurant = await (await getPrisma()).restaurant.update({
       where: { id: restaurant.id },
       data: { operatingHours: validatedHours },
       select: {
@@ -120,7 +120,7 @@ router.get('/status', authenticate, authorize(UserRole.RESTAURANT), async (req: 
   try {
     const userId = req.user!.userId;
 
-    const restaurant = await prisma.restaurant.findFirst({
+    const restaurant = await (await getPrisma()).restaurant.findFirst({
       where: { userId },
       select: {
         id: true,
@@ -214,7 +214,7 @@ router.get('/by-school/:schoolDomain', async (req: Request, res: Response): Prom
     const { schoolDomain } = req.params;
 
     // Find school by domain
-    const school = await prisma.school.findUnique({
+    const school = await (await getPrisma()).school.findUnique({
       where: { domain: schoolDomain, active: true }
     });
 
@@ -223,7 +223,7 @@ router.get('/by-school/:schoolDomain', async (req: Request, res: Response): Prom
       return;
     }
 
-    const restaurants = await prisma.restaurant.findMany({
+    const restaurants = await (await getPrisma()).restaurant.findMany({
       where: { 
         schoolId: school.id,
         active: true 
@@ -253,7 +253,7 @@ router.get('/:restaurantId/menu', async (req: Request, res: Response): Promise<v
   try {
     const { restaurantId } = req.params;
 
-    const restaurant = await prisma.restaurant.findUnique({
+    const restaurant = await (await getPrisma()).restaurant.findUnique({
       where: { 
         id: restaurantId,
         active: true 
@@ -308,7 +308,7 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
       whereClause.schoolId = schoolId as string;
     }
 
-    const restaurants = await prisma.restaurant.findMany({
+    const restaurants = await (await getPrisma()).restaurant.findMany({
       where: whereClause,
       select: {
         id: true,

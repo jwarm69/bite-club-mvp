@@ -21,7 +21,7 @@ const createCreditPaymentIntent = async (data) => {
     try {
         const { userId, amount, paymentMethodId } = data;
         // Get user info
-        const user = await index_1.prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { id: userId },
             select: { email: true, firstName: true, lastName: true }
         });
@@ -59,7 +59,7 @@ const createCreditCheckoutSession = async (data) => {
     try {
         const { userId, amount, successUrl, cancelUrl } = data;
         // Get user info
-        const user = await index_1.prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { id: userId },
             select: { email: true, firstName: true, lastName: true }
         });
@@ -111,7 +111,7 @@ const handleSuccessfulPayment = async (paymentIntentId, userId, amount) => {
             throw new Error('Payment not successful');
         }
         // Add credits to user account in a transaction
-        const result = await index_1.prisma.$transaction(async (tx) => {
+        const result = await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             // Update user credit balance
             const updatedUser = await tx.user.update({
                 where: { id: userId },

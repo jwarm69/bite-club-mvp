@@ -1,7 +1,5 @@
 import twilio from 'twilio';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { getPrisma } from '../index';
 
 // Twilio configuration
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
@@ -77,7 +75,7 @@ export class CallService {
       }
 
       // Get restaurant details
-      const restaurant = await prisma.restaurant.findUnique({
+      const restaurant = await (await getPrisma()).restaurant.findUnique({
         where: { id: orderData.restaurantId }
       });
 
@@ -112,7 +110,7 @@ export class CallService {
       });
 
       // Log the call attempt
-      await prisma.callLog.create({
+      await (await getPrisma()).callLog.create({
         data: {
           orderId: orderData.orderId,
           restaurantId: orderData.restaurantId,
@@ -130,7 +128,7 @@ export class CallService {
       console.error('[CALL_SERVICE] Error making call:', error);
       
       // Log failed call attempt
-      await prisma.callLog.create({
+      await (await getPrisma()).callLog.create({
         data: {
           orderId: orderData.orderId,
           restaurantId: orderData.restaurantId,
@@ -153,7 +151,7 @@ export class CallService {
       const callDuration = duration ? parseInt(duration) : null;
       const cost = callDuration ? this.calculateCallCost(callDuration) : null;
 
-      await prisma.callLog.updateMany({
+      await (await getPrisma()).callLog.updateMany({
         where: { twilioCallSid: callSid },
         data: {
           duration: callDuration,
@@ -184,7 +182,7 @@ export class CallService {
           success = true;
           
           // Update order status
-          await prisma.order.update({
+          await (await getPrisma()).order.update({
             where: { id: orderId },
             data: { status: 'CONFIRMED' }
           });
@@ -196,7 +194,7 @@ export class CallService {
           success = false;
           
           // Update order status
-          await prisma.order.update({
+          await (await getPrisma()).order.update({
             where: { id: orderId },
             data: { status: 'CANCELLED' }
           });
@@ -219,7 +217,7 @@ export class CallService {
       }
 
       // Update call log with response
-      await prisma.callLog.updateMany({
+      await (await getPrisma()).callLog.updateMany({
         where: { orderId },
         data: {
           keypadResponse: digits,
@@ -252,7 +250,7 @@ export class CallService {
    */
   async getOrderTwiML(orderId: string): Promise<string> {
     try {
-      const order = await prisma.order.findUnique({
+      const order = await (await getPrisma()).order.findUnique({
         where: { id: orderId },
         include: {
           user: true,
@@ -300,7 +298,7 @@ export class CallService {
    */
   private async getOrderDetailsForRepeat(orderId: string): Promise<string> {
     try {
-      const order = await prisma.order.findUnique({
+      const order = await (await getPrisma()).order.findUnique({
         where: { id: orderId },
         include: {
           user: true,
@@ -367,7 +365,7 @@ export class CallService {
    */
   async retryFailedCall(orderId: string): Promise<{ success: boolean; error?: string }> {
     try {
-      const order = await prisma.order.findUnique({
+      const order = await (await getPrisma()).order.findUnique({
         where: { id: orderId },
         include: {
           user: true,
@@ -385,7 +383,7 @@ export class CallService {
       }
 
       // Check retry limit
-      const callLogs = await prisma.callLog.findMany({
+      const callLogs = await (await getPrisma()).callLog.findMany({
         where: { orderId }
       });
 

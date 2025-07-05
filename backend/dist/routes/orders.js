@@ -4,11 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const client_1 = require("@prisma/client");
 const auth_1 = require("../middleware/auth");
 const call_1 = require("../services/call");
+const index_1 = require("../index");
 const router = express_1.default.Router();
-const prisma = new client_1.PrismaClient();
 // Create a new order (Student only)
 router.post('/', auth_1.authenticate, async (req, res) => {
     try {
@@ -19,7 +18,7 @@ router.post('/', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get user to check credit balance
-        const user = await prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { id: userId }
         });
         if (!user) {
@@ -27,7 +26,7 @@ router.post('/', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get restaurant promotions and customer relationship
-        const restaurant = await prisma.restaurant.findUnique({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findUnique({
             where: { id: restaurantId },
             include: {
                 restaurantPromotions: true
@@ -38,7 +37,7 @@ router.post('/', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get or create customer relationship
-        let customerRelationship = await prisma.customerRelationship.findUnique({
+        let customerRelationship = await (await (0, index_1.getPrisma)()).customerRelationship.findUnique({
             where: {
                 userId_restaurantId: {
                     userId,
@@ -47,7 +46,7 @@ router.post('/', auth_1.authenticate, async (req, res) => {
             }
         });
         if (!customerRelationship) {
-            customerRelationship = await prisma.customerRelationship.create({
+            customerRelationship = await (await (0, index_1.getPrisma)()).customerRelationship.create({
                 data: {
                     userId,
                     restaurantId,
@@ -86,7 +85,7 @@ router.post('/', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Start transaction to create order and apply all changes
-        const result = await prisma.$transaction(async (tx) => {
+        const result = await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             // Create the order
             const order = await tx.order.create({
                 data: {
@@ -222,7 +221,7 @@ router.get('/my-orders', auth_1.authenticate, async (req, res) => {
             res.status(401).json({ error: 'User not authenticated' });
             return;
         }
-        const orders = await prisma.order.findMany({
+        const orders = await (await (0, index_1.getPrisma)()).order.findMany({
             where: { userId },
             include: {
                 orderItems: {
@@ -253,7 +252,7 @@ router.get('/restaurant', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get restaurant for this user
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
@@ -266,7 +265,7 @@ router.get('/restaurant', auth_1.authenticate, async (req, res) => {
         if (status) {
             whereClause.status = status;
         }
-        const orders = await prisma.order.findMany({
+        const orders = await (await (0, index_1.getPrisma)()).order.findMany({
             where: whereClause,
             include: {
                 orderItems: {
@@ -306,7 +305,7 @@ router.patch('/:orderId/status', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get restaurant for this user
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
@@ -314,7 +313,7 @@ router.patch('/:orderId/status', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Verify this order belongs to this restaurant
-        const existingOrder = await prisma.order.findFirst({
+        const existingOrder = await (await (0, index_1.getPrisma)()).order.findFirst({
             where: {
                 id: orderId,
                 restaurantId: restaurant.id
@@ -325,7 +324,7 @@ router.patch('/:orderId/status', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Update order status
-        const updatedOrder = await prisma.order.update({
+        const updatedOrder = await (await (0, index_1.getPrisma)()).order.update({
             where: { id: orderId },
             data: { status },
             include: {
@@ -363,7 +362,7 @@ router.post('/check-promotions', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get restaurant promotions
-        const restaurant = await prisma.restaurant.findUnique({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findUnique({
             where: { id: restaurantId },
             include: {
                 restaurantPromotions: true
@@ -374,7 +373,7 @@ router.post('/check-promotions', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get customer relationship
-        const customerRelationship = await prisma.customerRelationship.findUnique({
+        const customerRelationship = await (await (0, index_1.getPrisma)()).customerRelationship.findUnique({
             where: {
                 userId_restaurantId: {
                     userId,
@@ -437,7 +436,7 @@ router.post('/:orderId/accept', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get restaurant for this user
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
@@ -445,7 +444,7 @@ router.post('/:orderId/accept', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get the order and verify it belongs to this restaurant
-        const order = await prisma.order.findFirst({
+        const order = await (await (0, index_1.getPrisma)()).order.findFirst({
             where: {
                 id: orderId,
                 restaurantId: restaurant.id,
@@ -466,7 +465,7 @@ router.post('/:orderId/accept', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Process the acceptance in a transaction
-        const result = await prisma.$transaction(async (tx) => {
+        const result = await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             // Charge the student's credits
             await tx.user.update({
                 where: { id: order.userId },
@@ -528,7 +527,7 @@ router.post('/:orderId/reject', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get restaurant for this user
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
@@ -536,7 +535,7 @@ router.post('/:orderId/reject', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get the order and verify it belongs to this restaurant
-        const order = await prisma.order.findFirst({
+        const order = await (await (0, index_1.getPrisma)()).order.findFirst({
             where: {
                 id: orderId,
                 restaurantId: restaurant.id,
@@ -559,7 +558,7 @@ router.post('/:orderId/reject', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Update order status to cancelled (no credit charge)
-        const updatedOrder = await prisma.order.update({
+        const updatedOrder = await (await (0, index_1.getPrisma)()).order.update({
             where: { id: orderId },
             data: {
                 status: 'CANCELLED',
@@ -600,7 +599,7 @@ router.post('/:orderId/closeout', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get restaurant for this user
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
@@ -608,7 +607,7 @@ router.post('/:orderId/closeout', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Get the order and verify it belongs to this restaurant
-        const order = await prisma.order.findFirst({
+        const order = await (await (0, index_1.getPrisma)()).order.findFirst({
             where: {
                 id: orderId,
                 restaurantId: restaurant.id,
@@ -620,7 +619,7 @@ router.post('/:orderId/closeout', auth_1.authenticate, async (req, res) => {
             return;
         }
         // Update order status to completed
-        const updatedOrder = await prisma.order.update({
+        const updatedOrder = await (await (0, index_1.getPrisma)()).order.update({
             where: { id: orderId },
             data: { status: 'COMPLETED' },
             include: {

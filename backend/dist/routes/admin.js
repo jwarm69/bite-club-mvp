@@ -11,7 +11,7 @@ const router = express_1.default.Router();
 // Get all restaurants for admin
 router.get('/restaurants', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
-        const restaurants = await index_1.prisma.restaurant.findMany({
+        const restaurants = await (await (0, index_1.getPrisma)()).restaurant.findMany({
             include: {
                 school: true,
                 orders: {
@@ -46,7 +46,7 @@ router.get('/restaurants', auth_1.authenticate, (0, auth_1.authorize)(client_1.U
 // Get all students for admin
 router.get('/students', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
-        const students = await index_1.prisma.user.findMany({
+        const students = await (await (0, index_1.getPrisma)()).user.findMany({
             where: {
                 role: client_1.UserRole.STUDENT
             },
@@ -101,7 +101,7 @@ router.get('/analytics/revenue', auth_1.authenticate, (0, auth_1.authorize)(clie
                 startDate.setHours(0, 0, 0, 0);
         }
         // Get completed orders within the period
-        const orders = await index_1.prisma.order.findMany({
+        const orders = await (await (0, index_1.getPrisma)()).order.findMany({
             where: {
                 status: 'COMPLETED',
                 createdAt: {
@@ -193,7 +193,7 @@ router.patch('/restaurants/:id/status', auth_1.authenticate, (0, auth_1.authoriz
     try {
         const { id } = req.params;
         const { active } = req.body;
-        const restaurant = await index_1.prisma.restaurant.update({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.update({
             where: { id },
             data: { active }
         });
@@ -213,7 +213,7 @@ router.patch('/restaurants/:id/status', auth_1.authenticate, (0, auth_1.authoriz
 router.get('/students/:id', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
         const { id } = req.params;
-        const student = await index_1.prisma.user.findUnique({
+        const student = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: {
                 id,
                 role: client_1.UserRole.STUDENT
@@ -271,7 +271,7 @@ router.post('/students/:id/credits', auth_1.authenticate, (0, auth_1.authorize)(
             return;
         }
         // Update user balance and create transaction
-        const result = await index_1.prisma.$transaction(async (tx) => {
+        const result = await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             // Update user balance
             const user = await tx.user.update({
                 where: { id },
@@ -308,7 +308,7 @@ router.post('/orders/:id/refund', auth_1.authenticate, (0, auth_1.authorize)(cli
     try {
         const { id } = req.params;
         const { reason } = req.body;
-        const order = await index_1.prisma.order.findUnique({
+        const order = await (await (0, index_1.getPrisma)()).order.findUnique({
             where: { id },
             include: {
                 user: true
@@ -323,7 +323,7 @@ router.post('/orders/:id/refund', auth_1.authenticate, (0, auth_1.authorize)(cli
             return;
         }
         // Process refund
-        const result = await index_1.prisma.$transaction(async (tx) => {
+        const result = await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             // Update order status
             const updatedOrder = await tx.order.update({
                 where: { id },
@@ -369,7 +369,7 @@ router.post('/orders/:id/refund', auth_1.authenticate, (0, auth_1.authorize)(cli
 router.get('/restaurants/:id', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
         const { id } = req.params;
-        const restaurant = await index_1.prisma.restaurant.findUnique({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findUnique({
             where: { id },
             select: {
                 id: true,
@@ -410,7 +410,7 @@ router.put('/restaurants/:id', auth_1.authenticate, (0, auth_1.authorize)(client
             res.status(400).json({ error: 'Restaurant name is required' });
             return;
         }
-        const restaurant = await index_1.prisma.restaurant.update({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.update({
             where: { id },
             data: {
                 name: name.trim(),
@@ -458,7 +458,7 @@ router.put('/restaurants/:id/hours', auth_1.authenticate, (0, auth_1.authorize)(
             res.status(400).json({ error: 'Invalid operating hours format' });
             return;
         }
-        const restaurant = await index_1.prisma.restaurant.update({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.update({
             where: { id },
             data: { operatingHours: validatedHours },
             select: {
@@ -482,7 +482,7 @@ router.put('/restaurants/:id/hours', auth_1.authenticate, (0, auth_1.authorize)(
 router.get('/restaurants/:id/hours', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
         const { id } = req.params;
-        const restaurant = await index_1.prisma.restaurant.findUnique({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findUnique({
             where: { id },
             select: {
                 id: true,

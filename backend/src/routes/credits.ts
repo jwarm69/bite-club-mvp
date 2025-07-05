@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { UserRole } from '@prisma/client';
-import { prisma } from '../index';
+import { getPrisma } from '../index';
 import { authenticate, authorize } from '../middleware/auth';
 import { 
   createCreditCheckoutSession, 
@@ -17,7 +17,7 @@ router.get('/balance', authenticate, authorize(UserRole.STUDENT), async (req: Re
   try {
     const userId = req.user!.userId;
 
-    const user = await prisma.user.findUnique({
+    const user = await (await getPrisma()).user.findUnique({
       where: { id: userId },
       select: {
         creditBalance: true,
@@ -233,7 +233,7 @@ router.post('/admin/add', authenticate, authorize(UserRole.ADMIN), async (req: R
       return;
     }
 
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await (await getPrisma()).$transaction(async (tx) => {
       // Update user credit balance
       const updatedUser = await tx.user.update({
         where: { id: userId },

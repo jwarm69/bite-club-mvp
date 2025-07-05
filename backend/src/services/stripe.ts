@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { prisma } from '../index';
+import { getPrisma } from '../index';
 
 // Gracefully handle missing Stripe keys for test deployment
 const stripeEnabled = !!process.env.STRIPE_SECRET_KEY;
@@ -30,7 +30,7 @@ export const createCreditPaymentIntent = async (data: CreditPurchaseData) => {
     const { userId, amount, paymentMethodId } = data;
 
     // Get user info
-    const user = await prisma.user.findUnique({
+    const user = await (await getPrisma()).user.findUnique({
       where: { id: userId },
       select: { email: true, firstName: true, lastName: true }
     });
@@ -72,7 +72,7 @@ export const createCreditCheckoutSession = async (data: CreateCheckoutSessionDat
     const { userId, amount, successUrl, cancelUrl } = data;
 
     // Get user info
-    const user = await prisma.user.findUnique({
+    const user = await (await getPrisma()).user.findUnique({
       where: { id: userId },
       select: { email: true, firstName: true, lastName: true }
     });
@@ -133,7 +133,7 @@ export const handleSuccessfulPayment = async (
     }
 
     // Add credits to user account in a transaction
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await (await getPrisma()).$transaction(async (tx) => {
       // Update user credit balance
       const updatedUser = await tx.user.update({
         where: { id: userId },

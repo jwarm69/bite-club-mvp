@@ -13,7 +13,7 @@ const router = express_1.default.Router();
 router.get('/balance', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.STUDENT), async (req, res) => {
     try {
         const userId = req.user.userId;
-        const user = await index_1.prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { id: userId },
             select: {
                 creditBalance: true,
@@ -198,7 +198,7 @@ router.post('/admin/add', auth_1.authenticate, (0, auth_1.authorize)(client_1.Us
             res.status(400).json({ error: 'Valid user ID and amount are required' });
             return;
         }
-        const result = await index_1.prisma.$transaction(async (tx) => {
+        const result = await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             // Update user credit balance
             const updatedUser = await tx.user.update({
                 where: { id: userId },

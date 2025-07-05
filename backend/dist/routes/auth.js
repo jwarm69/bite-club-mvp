@@ -14,7 +14,7 @@ const router = express_1.default.Router();
 // Get all active schools for signup
 router.get('/schools', async (req, res) => {
     try {
-        const schools = await index_1.prisma.school.findMany({
+        const schools = await (await (0, index_1.getPrisma)()).school.findMany({
             where: { active: true },
             select: {
                 id: true,
@@ -42,7 +42,7 @@ router.post('/signup/student', async (req, res) => {
         }
         // Note: Email domain verification removed - students can use any email
         // Find school by domain
-        const school = await index_1.prisma.school.findUnique({
+        const school = await (await (0, index_1.getPrisma)()).school.findUnique({
             where: { domain: schoolDomain, active: true }
         });
         if (!school) {
@@ -50,7 +50,7 @@ router.post('/signup/student', async (req, res) => {
             return;
         }
         // Check if user already exists
-        const existingUser = await index_1.prisma.user.findUnique({
+        const existingUser = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { email: email.toLowerCase() }
         });
         if (existingUser) {
@@ -60,7 +60,7 @@ router.post('/signup/student', async (req, res) => {
         // Hash password
         const passwordHash = await (0, auth_1.hashPassword)(password);
         // Create user
-        const user = await index_1.prisma.user.create({
+        const user = await (await (0, index_1.getPrisma)()).user.create({
             data: {
                 email: email.toLowerCase(),
                 passwordHash,
@@ -114,7 +114,7 @@ router.post('/signup/restaurant', async (req, res) => {
             return;
         }
         // Find school by domain
-        const school = await index_1.prisma.school.findUnique({
+        const school = await (await (0, index_1.getPrisma)()).school.findUnique({
             where: { domain: schoolDomain, active: true }
         });
         if (!school) {
@@ -122,7 +122,7 @@ router.post('/signup/restaurant', async (req, res) => {
             return;
         }
         // Check if user already exists
-        const existingUser = await index_1.prisma.user.findUnique({
+        const existingUser = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { email: email.toLowerCase() }
         });
         if (existingUser) {
@@ -132,7 +132,7 @@ router.post('/signup/restaurant', async (req, res) => {
         // Hash password
         const passwordHash = await (0, auth_1.hashPassword)(password);
         // Create user and restaurant in a transaction
-        const result = await index_1.prisma.$transaction(async (tx) => {
+        const result = await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             // Create user
             const user = await tx.user.create({
                 data: {
@@ -176,7 +176,7 @@ router.post('/login', async (req, res) => {
             return;
         }
         // Find user
-        const user = await index_1.prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { email: email.toLowerCase() },
             include: {
                 school: {
@@ -200,7 +200,7 @@ router.post('/login', async (req, res) => {
         }
         // For restaurant users, check if restaurant is approved
         if (user.role === client_1.UserRole.RESTAURANT) {
-            const restaurant = await index_1.prisma.restaurant.findFirst({
+            const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
                 where: { email: user.email, active: true }
             });
             if (!restaurant) {
@@ -233,7 +233,7 @@ router.post('/login', async (req, res) => {
 // Get current user profile
 router.get('/me', auth_2.authenticate, async (req, res) => {
     try {
-        const user = await index_1.prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { id: req.user.userId },
             select: {
                 id: true,
@@ -266,7 +266,7 @@ router.get('/me', auth_2.authenticate, async (req, res) => {
 // Get available schools
 router.get('/schools', async (req, res) => {
     try {
-        const schools = await index_1.prisma.school.findMany({
+        const schools = await (await (0, index_1.getPrisma)()).school.findMany({
             where: { active: true },
             select: {
                 id: true,
@@ -292,7 +292,7 @@ router.post('/forgot-password', async (req, res) => {
             return;
         }
         // Find user by email
-        const user = await index_1.prisma.user.findUnique({
+        const user = await (await (0, index_1.getPrisma)()).user.findUnique({
             where: { email: email.toLowerCase() }
         });
         // Always return success for security (don't reveal if email exists)
@@ -309,7 +309,7 @@ router.post('/forgot-password', async (req, res) => {
         const resetToken = crypto_1.default.randomBytes(32).toString('hex');
         const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
         // Store reset token in database
-        await index_1.prisma.passwordResetToken.create({
+        await (await (0, index_1.getPrisma)()).passwordResetToken.create({
             data: {
                 token: resetToken,
                 userId: user.id,
@@ -339,7 +339,7 @@ router.post('/reset-password', async (req, res) => {
             return;
         }
         // Find and validate reset token
-        const resetToken = await index_1.prisma.passwordResetToken.findUnique({
+        const resetToken = await (await (0, index_1.getPrisma)()).passwordResetToken.findUnique({
             where: { token },
             include: { user: true }
         });
@@ -350,7 +350,7 @@ router.post('/reset-password', async (req, res) => {
         // Hash new password
         const passwordHash = await (0, auth_1.hashPassword)(password);
         // Update password and mark token as used
-        await index_1.prisma.$transaction(async (tx) => {
+        await (await (0, index_1.getPrisma)()).$transaction(async (tx) => {
             await tx.user.update({
                 where: { id: resetToken.userId },
                 data: { passwordHash }

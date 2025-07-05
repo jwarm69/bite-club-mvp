@@ -16,7 +16,7 @@ async function getRestaurantId(req) {
     }
     else {
         // Find restaurant owned by this user
-        const restaurant = await index_1.prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId: req.user.userId },
             select: { id: true }
         });
@@ -185,7 +185,7 @@ router.get('/types', auth_1.authenticate, async (req, res) => {
 // Admin: Get all restaurants with integration status
 router.get('/admin/restaurants', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
-        const restaurants = await index_1.prisma.restaurant.findMany({
+        const restaurants = await (await (0, index_1.getPrisma)()).restaurant.findMany({
             include: {
                 school: true,
                 integrationConfigs: true

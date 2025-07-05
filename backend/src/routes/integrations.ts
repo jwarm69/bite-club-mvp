@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { UserRole } from '@prisma/client';
 import { authenticate, authorize } from '../middleware/auth';
 import { integrationManager } from '../services/integration';
-import { prisma } from '../index';
+import { getPrisma } from '../index';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ async function getRestaurantId(req: Request): Promise<string | null> {
     return req.body.restaurantId || req.query.restaurantId as string || null;
   } else {
     // Find restaurant owned by this user
-    const restaurant = await prisma.restaurant.findFirst({
+    const restaurant = await (await getPrisma()).restaurant.findFirst({
       where: { userId: req.user!.userId },
       select: { id: true }
     });
@@ -199,7 +199,7 @@ router.get('/types', authenticate, async (req: Request, res: Response): Promise<
 // Admin: Get all restaurants with integration status
 router.get('/admin/restaurants', authenticate, authorize(UserRole.ADMIN), async (req: Request, res: Response): Promise<void> => {
   try {
-    const restaurants = await prisma.restaurant.findMany({
+    const restaurants = await (await getPrisma()).restaurant.findMany({
       include: {
         school: true,
         integrationConfigs: true

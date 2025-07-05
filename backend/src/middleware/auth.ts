@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserRole } from '@prisma/client';
 import { verifyToken, extractToken, JWTPayload } from '../utils/auth';
-import { prisma } from '../index';
+import { getPrisma } from '../index';
 
 // Extend Express Request to include user info
 declare global {
@@ -28,7 +28,7 @@ export const authenticate = async (
     const payload = verifyToken(token);
     
     // Verify user still exists and is active
-    const user = await prisma.user.findUnique({
+    const user = await (await getPrisma()).user.findUnique({
       where: { id: payload.userId, active: true }
     });
 

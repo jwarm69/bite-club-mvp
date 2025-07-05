@@ -98,7 +98,7 @@ class IntegrationManager {
                 return { success: false, error: 'Invalid configuration' };
             }
             // Save or update integration config
-            await index_1.prisma.integrationConfig.upsert({
+            await (await (0, index_1.getPrisma)()).integrationConfig.upsert({
                 where: {
                     restaurantId_integrationType: {
                         restaurantId,
@@ -126,7 +126,7 @@ class IntegrationManager {
     }
     async disableIntegration(restaurantId, type) {
         try {
-            await index_1.prisma.integrationConfig.update({
+            await (await (0, index_1.getPrisma)()).integrationConfig.update({
                 where: {
                     restaurantId_integrationType: {
                         restaurantId,
@@ -144,7 +144,7 @@ class IntegrationManager {
     }
     async syncRestaurantMenu(restaurantId, integrationType) {
         try {
-            const configs = await index_1.prisma.integrationConfig.findMany({
+            const configs = await (await (0, index_1.getPrisma)()).integrationConfig.findMany({
                 where: {
                     restaurantId,
                     enabled: true,
@@ -171,14 +171,14 @@ class IntegrationManager {
     }
     async syncOrderToIntegrations(orderId) {
         try {
-            const order = await index_1.prisma.order.findUnique({
+            const order = await (await (0, index_1.getPrisma)()).order.findUnique({
                 where: { id: orderId },
                 include: { restaurant: true }
             });
             if (!order) {
                 return { success: false, results: [] };
             }
-            const configs = await index_1.prisma.integrationConfig.findMany({
+            const configs = await (await (0, index_1.getPrisma)()).integrationConfig.findMany({
                 where: {
                     restaurantId: order.restaurantId,
                     enabled: true,
@@ -201,7 +201,7 @@ class IntegrationManager {
                             orderId: result.externalOrderId,
                             syncedAt: new Date()
                         };
-                        await index_1.prisma.order.update({
+                        await (await (0, index_1.getPrisma)()).order.update({
                             where: { id: orderId },
                             data: {
                                 externalOrderData: externalData,
@@ -220,7 +220,7 @@ class IntegrationManager {
     }
     async getIntegrationStatus(restaurantId) {
         try {
-            const configs = await index_1.prisma.integrationConfig.findMany({
+            const configs = await (await (0, index_1.getPrisma)()).integrationConfig.findMany({
                 where: { restaurantId },
                 orderBy: { integrationType: 'asc' }
             });
@@ -245,7 +245,7 @@ exports.integrationManager = new IntegrationManager();
 // Helper functions for specific integrations
 async function getRestaurantToastConfig(restaurantId) {
     try {
-        const config = await index_1.prisma.integrationConfig.findUnique({
+        const config = await (await (0, index_1.getPrisma)()).integrationConfig.findUnique({
             where: {
                 restaurantId_integrationType: {
                     restaurantId,
@@ -262,7 +262,7 @@ async function getRestaurantToastConfig(restaurantId) {
 }
 async function updateRestaurantToastGuid(restaurantId, toastLocationGuid) {
     try {
-        await index_1.prisma.restaurant.update({
+        await (await (0, index_1.getPrisma)()).restaurant.update({
             where: { id: restaurantId },
             data: { toastLocationGuid }
         });

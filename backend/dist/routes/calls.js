@@ -7,8 +7,8 @@ const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const auth_1 = require("../middleware/auth");
 const call_1 = require("../services/call");
+const index_1 = require("../index");
 const router = express_1.default.Router();
-const prisma = new client_1.PrismaClient();
 // Webhook endpoint for Twilio TwiML responses
 router.get('/twiml/:orderId', async (req, res) => {
     try {
@@ -63,7 +63,7 @@ router.post('/status-callback', async (req, res) => {
 router.get('/settings', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.RESTAURANT), async (req, res) => {
     try {
         const userId = req.user.userId;
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId },
             select: {
                 id: true,
@@ -104,14 +104,14 @@ router.put('/settings', auth_1.authenticate, (0, auth_1.authorize)(client_1.User
             res.status(400).json({ error: 'callTimeoutSeconds must be between 15 and 120' });
             return;
         }
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
             res.status(404).json({ error: 'Restaurant not found' });
             return;
         }
-        const updatedRestaurant = await prisma.restaurant.update({
+        const updatedRestaurant = await (await (0, index_1.getPrisma)()).restaurant.update({
             where: { id: restaurant.id },
             data: {
                 callEnabled,
@@ -141,14 +141,14 @@ router.get('/history', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserR
     try {
         const userId = req.user.userId;
         const { limit = 50, offset = 0 } = req.query;
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
             res.status(404).json({ error: 'Restaurant not found' });
             return;
         }
-        const callLogs = await prisma.callLog.findMany({
+        const callLogs = await (await (0, index_1.getPrisma)()).callLog.findMany({
             where: { restaurantId: restaurant.id },
             include: {
                 order: {
@@ -167,10 +167,10 @@ router.get('/history', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserR
             take: Number(limit),
             skip: Number(offset)
         });
-        const totalCalls = await prisma.callLog.count({
+        const totalCalls = await (await (0, index_1.getPrisma)()).callLog.count({
             where: { restaurantId: restaurant.id }
         });
-        const stats = await prisma.callLog.aggregate({
+        const stats = await (await (0, index_1.getPrisma)()).callLog.aggregate({
             where: { restaurantId: restaurant.id },
             _sum: { cost: true },
             _count: { id: true }
@@ -199,14 +199,14 @@ router.post('/retry/:orderId', auth_1.authenticate, (0, auth_1.authorize)(client
         const userId = req.user.userId;
         const { orderId } = req.params;
         // Verify restaurant owns this order
-        const restaurant = await prisma.restaurant.findFirst({
+        const restaurant = await (await (0, index_1.getPrisma)()).restaurant.findFirst({
             where: { userId }
         });
         if (!restaurant) {
             res.status(404).json({ error: 'Restaurant not found' });
             return;
         }
-        const order = await prisma.order.findFirst({
+        const order = await (await (0, index_1.getPrisma)()).order.findFirst({
             where: {
                 id: orderId,
                 restaurantId: restaurant.id
@@ -233,7 +233,7 @@ router.post('/retry/:orderId', auth_1.authenticate, (0, auth_1.authorize)(client
 // Get all restaurant call settings (Admin only)
 router.get('/admin/restaurants', auth_1.authenticate, (0, auth_1.authorize)(client_1.UserRole.ADMIN), async (req, res) => {
     try {
-        const restaurants = await prisma.restaurant.findMany({
+        const restaurants = await (await (0, index_1.getPrisma)()).restaurant.findMany({
             select: {
                 id: true,
                 name: true,
@@ -263,7 +263,7 @@ router.put('/admin/restaurants/:restaurantId', auth_1.authenticate, (0, auth_1.a
     try {
         const { restaurantId } = req.params;
         const { callEnabled, callPhone, callRetries, callTimeoutSeconds } = req.body;
-        const updatedRestaurant = await prisma.restaurant.update({
+        const updatedRestaurant = await (await (0, index_1.getPrisma)()).restaurant.update({
             where: { id: restaurantId },
             data: {
                 callEnabled,
@@ -298,17 +298,17 @@ router.get('/admin/analytics', auth_1.authenticate, (0, auth_1.authorize)(client
                 lte: new Date(endDate)
             }
         } : {};
-        const stats = await prisma.callLog.aggregate({
+        const stats = await (await (0, index_1.getPrisma)()).callLog.aggregate({
             where: dateFilter,
             _sum: { cost: true, duration: true },
             _count: { id: true }
         });
-        const responseStats = await prisma.callLog.groupBy({
+        const responseStats = await (await (0, index_1.getPrisma)()).callLog.groupBy({
             by: ['responseType'],
             where: dateFilter,
             _count: { id: true }
         });
-        const restaurantStats = await prisma.callLog.groupBy({
+        const restaurantStats = await (await (0, index_1.getPrisma)()).callLog.groupBy({
             by: ['restaurantId'],
             where: dateFilter,
             _count: { id: true },
