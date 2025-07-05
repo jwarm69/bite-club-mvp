@@ -4,7 +4,7 @@ services:
     name: bite-club-backend
     runtime: docker
     repo: https://github.com/jwarm69/bite-club-mvp.git
-    dockerfilePath: ./Dockerfile.backend.minimal-supabase
+    dockerfilePath: ./Dockerfile.backend.full
     region: oregon
     plan: starter
     envVars:

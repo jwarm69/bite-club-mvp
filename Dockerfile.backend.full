@@ -1,0 +1,28 @@
+# Full production backend with verified Supabase connection
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY backend/package*.json ./
+
+# Install ALL dependencies (keep everything for Prisma)
+RUN npm ci
+
+# Copy and generate Prisma client
+COPY backend/prisma ./prisma
+RUN npx prisma generate
+
+# Copy source code and TypeScript config
+COPY backend/src ./src
+COPY backend/tsconfig.json ./
+
+# Build TypeScript
+RUN npx tsc
+
+# IMPORTANT: Keep all dependencies, don't remove them!
+
+EXPOSE 3001
+
+# Use the actual backend entry point
+CMD ["node", "dist/index.js"]
