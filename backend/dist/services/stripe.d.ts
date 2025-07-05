@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
-declare const stripe: Stripe;
+declare const stripeEnabled: boolean;
+declare const stripe: Stripe | null;
 export interface CreditPurchaseData {
     userId: string;
     amount: number;
@@ -42,5 +43,5 @@ export declare const handleSuccessfulPayment: (paymentIntentId: string, userId: 
 }>;
 export declare const processRefund: (paymentIntentId: string, amount?: number) => Promise<Stripe.Response<Stripe.Refund>>;
 export declare const getCustomerPaymentMethods: (customerId: string) => Promise<Stripe.Response<Stripe.ApiList<Stripe.PaymentMethod>>>;
-export { stripe };
+export { stripe, stripeEnabled };
 //# sourceMappingURL=stripe.d.ts.map

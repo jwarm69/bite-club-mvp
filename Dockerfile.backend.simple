@@ -1,0 +1,25 @@
+# Simple backend build for debugging
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY backend/package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY backend/src ./src
+COPY backend/prisma ./prisma
+COPY backend/tsconfig.json ./
+
+# Build TypeScript
+RUN npm run build
+
+# Generate Prisma Client
+RUN npx prisma generate
+
+EXPOSE 3001
+
+CMD ["node", "dist/index.js"]

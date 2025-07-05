@@ -3,15 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stripe = exports.getCustomerPaymentMethods = exports.processRefund = exports.handleSuccessfulPayment = exports.createCreditCheckoutSession = exports.createCreditPaymentIntent = void 0;
+exports.stripeEnabled = exports.stripe = exports.getCustomerPaymentMethods = exports.processRefund = exports.handleSuccessfulPayment = exports.createCreditCheckoutSession = exports.createCreditPaymentIntent = void 0;
 const stripe_1 = __importDefault(require("stripe"));
 const index_1 = require("../index");
-const stripe = new stripe_1.default(process.env.STRIPE_SECRET_KEY, {
+// Gracefully handle missing Stripe keys for test deployment
+const stripeEnabled = !!process.env.STRIPE_SECRET_KEY;
+exports.stripeEnabled = stripeEnabled;
+const stripe = stripeEnabled ? new stripe_1.default(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2025-05-28.basil'
-});
+}) : null;
 exports.stripe = stripe;
 // Create payment intent for credit purchase
 const createCreditPaymentIntent = async (data) => {
+    if (!stripeEnabled || !stripe) {
+        throw new Error('Payment processing temporarily disabled - Stripe not configured');
+    }
     try {
         const { userId, amount, paymentMethodId } = data;
         // Get user info
@@ -47,6 +53,9 @@ const createCreditPaymentIntent = async (data) => {
 exports.createCreditPaymentIntent = createCreditPaymentIntent;
 // Create checkout session for credit purchase
 const createCreditCheckoutSession = async (data) => {
+    if (!stripeEnabled || !stripe) {
+        throw new Error('Payment processing temporarily disabled - Stripe not configured');
+    }
     try {
         const { userId, amount, successUrl, cancelUrl } = data;
         // Get user info
@@ -92,6 +101,9 @@ const createCreditCheckoutSession = async (data) => {
 exports.createCreditCheckoutSession = createCreditCheckoutSession;
 // Handle successful payment and add credits
 const handleSuccessfulPayment = async (paymentIntentId, userId, amount) => {
+    if (!stripeEnabled || !stripe) {
+        throw new Error('Payment processing temporarily disabled - Stripe not configured');
+    }
     try {
         // Verify payment with Stripe
         const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);

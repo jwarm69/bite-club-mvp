@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
 const http_1 = require("http");
 const socket_io_1 = require("socket.io");
 const client_1 = require("@prisma/client");
@@ -51,12 +52,41 @@ app.use('/api/restaurant', restaurant_1.default);
 app.use('/api/orders', orders_1.default);
 app.use('/api/calls', calls_1.default);
 app.use('/api/integrations', integrations_1.default);
+// Debug route to check public directory
+app.get('/debug-public', (req, res) => {
+    const fs = require('fs');
+    const publicPath = path_1.default.join(__dirname, '../public');
+    try {
+        const files = fs.readdirSync(publicPath);
+        res.json({
+            publicPath,
+            files,
+            indexExists: fs.existsSync(path_1.default.join(publicPath, 'index.html'))
+        });
+    }
+    catch (error) {
+        res.json({ error: error instanceof Error ? error.message : 'Unknown error', publicPath });
+    }
+});
+// Serve React static files
+const publicPath = process.env.NODE_ENV === 'production'
+    ? path_1.default.join(__dirname, '../public')
+    : path_1.default.join(__dirname, '../public');
+app.use(express_1.default.static(publicPath));
 // Socket.io connection handling
 io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);
     socket.on('disconnect', () => {
         console.log('Client disconnected:', socket.id);
     });
+});
+// Simple test route
+app.get('/test', (req, res) => {
+    res.send('Test route works!');
+});
+// Handle React routing - catch all handler: send back React's index.html file
+app.get('*', (req, res) => {
+    res.send('Catch-all route hit for: ' + req.path);
 });
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {

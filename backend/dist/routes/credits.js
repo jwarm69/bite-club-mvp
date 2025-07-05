@@ -140,6 +140,10 @@ router.post('/purchase/confirm', auth_1.authenticate, (0, auth_1.authorize)(clie
 });
 // Webhook endpoint for Stripe events
 router.post('/webhook', express_1.default.raw({ type: 'application/json' }), async (req, res) => {
+    if (!stripe_1.stripeEnabled || !stripe_1.stripe) {
+        res.status(503).json({ error: 'Payment processing temporarily disabled' });
+        return;
+    }
     const sig = req.headers['stripe-signature'];
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
     if (!sig || !webhookSecret) {
