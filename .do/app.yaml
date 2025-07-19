@@ -1,0 +1,72 @@
+name: bite-club-mvp
+services:
+- name: backend
+  source_dir: backend
+  github:
+    repo: jwarm69/bite-club-mvp
+    branch: main
+  build_command: |
+    npm ci
+    npx prisma generate
+    npm run build
+  run_command: npm start
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  dockerfile_path: backend/Dockerfile.prod
+  http_port: 3001
+  health_check:
+    http_path: /health
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: DATABASE_URL
+    value: ${DATABASE_URL}
+  - key: JWT_SECRET
+    value: ${JWT_SECRET}
+  - key: STRIPE_SECRET_KEY
+    value: ${STRIPE_SECRET_KEY}
+  - key: STRIPE_WEBHOOK_SECRET
+    value: ${STRIPE_WEBHOOK_SECRET}
+  - key: TWILIO_ACCOUNT_SID
+    value: ${TWILIO_ACCOUNT_SID}
+  - key: TWILIO_AUTH_TOKEN
+    value: ${TWILIO_AUTH_TOKEN}
+  - key: TWILIO_FROM_PHONE
+    value: ${TWILIO_FROM_PHONE}
+  - key: EMAIL_USER
+    value: ${EMAIL_USER}
+  - key: EMAIL_PASS
+    value: ${EMAIL_PASS}
+  - key: OPENAI_API_KEY
+    value: ${OPENAI_API_KEY}
+  - key: FRONTEND_URL
+    value: ${_self.FRONTEND_URL}
+  - key: APP_URL
+    value: ${_self.URL}
+
+- name: frontend
+  source_dir: frontend
+  github:
+    repo: jwarm69/bite-club-mvp
+    branch: main
+  build_command: npm run build
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  dockerfile_path: frontend/Dockerfile.prod
+  http_port: 80
+  routes:
+  - path: /
+  envs:
+  - key: REACT_APP_API_URL
+    value: ${backend.URL}/api
+  - key: REACT_APP_STRIPE_PUBLISHABLE_KEY
+    value: ${STRIPE_PUBLISHABLE_KEY}
+
+databases:
+- name: bite-club-db
+  engine: PG
+  version: "14"
+  production: false
+  cluster_name: bite-club-cluster
